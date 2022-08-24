@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+
 app = FastAPI()
 
 origins = [
     "http://localhost:3000",
     "localhost:3000"
 ]
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -16,6 +18,12 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+
 @app.get("/", tags=["root"])
 async def read_root() -> dict:
-    return {"message": "Welcome to the main page"}
+    return {"message": "Welcome to your todo list."}
+
+
+@app.post("/", tags=["root"])
+async def login(id, password):
+    return 
