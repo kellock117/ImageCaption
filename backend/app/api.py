@@ -21,9 +21,9 @@ app.add_middleware(
 
 @app.get("/", tags=["root"])
 async def read_root() -> dict:
-    return {"message": "Welcome to your todo list."}
+    return {"message": "Welcome."}
 
 
 @app.post("/", tags=["root"])
 async def login(id, password):
-    return 
+    return

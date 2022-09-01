@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# setup environment
 firebaseConfig = {
     "apiKey": os.environ.get('API_KEY'),
     "authDomain": os.environ.get('AUTH_DOMAIN'),
@@ -18,7 +19,13 @@ firebaseConfig = {
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 
+# receive personal information from client for authentication
 id = input("Enter your ID: ")
 password = input("Enter your password: ")
-auth.sign_in_with_email_and_password(id, password)
-print("ok")
+
+# check whethe input is valid. If not return error message
+try:
+    auth.sign_in_with_email_and_password(id, password)
+    print("ok")
+except:
+    print("invalid user name or password")
