@@ -1,25 +1,10 @@
 import React, { Component } from "react";
+
 export default class Login extends Component {
   render() {
     return (
       <form>
         <h3>Sign In</h3>
-        <div className="mb-3">
-          <label>First Name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter First Name"
-          />
-        </div>
-        <div className="mb-3">
-          <label>Last Name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter Last Name"
-          />
-        </div>
         <div className="mb-3">
           <label>Email address</label>
           <input
@@ -53,10 +38,7 @@ export default class Login extends Component {
             Submit
           </button>
         </div>
-        <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
-        </p>
       </form>
-    )
+    );
   }
 }
