@@ -1,44 +1,60 @@
-import React, { Component } from "react";
+import React, { useRef, useState } from "react";
+import { useAuth } from "../../utils/authContext";
 
-export default class Login extends Component {
-  render() {
-    return (
-      <form>
-        <h3>Sign In</h3>
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
-          />
-        </div>
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-          />
-        </div>
-        <div className="mb-3">
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
-          </div>
-        </div>
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
-      </form>
-    );
+export default function Login() {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+    } catch {
+      setError("Invalid input");
+    }
+
+    setLoading(false);
   }
+
+  return (
+    <form action="#">
+      <h3>Sign In</h3>
+      <div className="mb-3">
+        <label>Email address</label>
+        <input
+          type="email"
+          className="form-control"
+          placeholder="Enter email"
+          ref={emailRef}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label>Password</label>
+        <input
+          type="password"
+          className="form-control"
+          placeholder="Enter password"
+          ref={passwordRef}
+          required
+        />
+      </div>
+      <div className="d-grid">
+        <button
+          disabled={loading}
+          onClick={handleSubmit}
+          className="btn btn-primary"
+        >
+          Submit
+        </button>
+      </div>
+      {error}
+    </form>
+  );
 }

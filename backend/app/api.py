@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from user.py import checkValidation
+
 
 app = FastAPI()
 
@@ -25,5 +27,5 @@ async def read_root() -> dict:
 
 
 @app.post("/", tags=["root"])
-async def login(id, password):
-    return
+async def login(id: str, password: str) -> None:
+    return checkValidation(id, password)
