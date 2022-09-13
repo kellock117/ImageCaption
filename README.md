@@ -2,7 +2,7 @@
 
 ## dependencies
 
-frontend / npm install \n
+frontend / npm install <br />
 backend / pip install uvicorn fastapi
 
 ## Add your files
