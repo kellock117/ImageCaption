@@ -4,7 +4,7 @@ import React, { Component } from "react";
 export default class NavBar extends Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+      <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
         <div className="container">
           <Link className="navbar-brand" to={"/sign-in"}>
             Show And Tell
