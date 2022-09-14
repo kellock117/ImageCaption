@@ -36,11 +36,20 @@ def saveHistory(image, text: str) -> bool:
     return True
 
 
-def viewHistory():
+def viewHistory() -> list:
+    data = []
+
     # scrap all of the history information from the database
     historyInfo = database.child("History").get()
 
-    return historyInfo
+    for history in historyInfo.each():
+        key = history.key()
+        caption = history.val()
+        image = storage.child("images/" + key).get_url(None)
+
+        data.append({"image": image, "caption": caption})
+
+    return data
 
 
 viewHistory()

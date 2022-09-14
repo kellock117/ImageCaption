@@ -1,7 +1,5 @@
-import sys
-sys.path.append('/fyp/backend/entity')
+from entity.history import saveHistory, viewHistory
 
-from history.py import saveHistory, viewHistory
 
 def apiSaveData(image, text) -> bool:
     # to avoid duplicated filename, concatenate timestamp after the file name
@@ -9,15 +7,7 @@ def apiSaveData(image, text) -> bool:
 
 
 def apiViewHistory() -> list:
-    data = []
-    historyInfo = viewHistory()
-
-    for history in historyInfo.each():
-        key = history.key()
-        caption = history.val()
-        image = storage.child("images/" + key).get_url(None)
-
-        data.append({"image": image, "caption": caption})
+    data = viewHistory()
 
     return data
 
