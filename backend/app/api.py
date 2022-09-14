@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 
-from user.py import checkValidation
+from history.controller.py import apiSaveData
+from captioning.py import caption
 
 
 app = FastAPI()
@@ -21,11 +22,11 @@ app.add_middleware(
 )
 
 
-@app.get("/", tags=["root"])
-async def read_root() -> dict:
-    return {"message": "Welcome."}
+@app.post("/captioning")
+async def caption(image: UploadFile = File(...)) -> str:
+    # produce the caption
+    caption = caption(image)
+    # save the image and caption information
+    apiSaveData(image, caption)
 
-
-@app.post("/", tags=["root"])
-async def login(id: str, password: str) -> None:
-    return checkValidation(id, password)
+    return caption

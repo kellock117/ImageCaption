@@ -3,7 +3,7 @@
 ## dependencies
 
 frontend / npm install
-backend / pip install uvicorn fastapi fyrebase jwt python-dotenv
+backend / pip install uvicorn fastapi
 
 ## Add your files
 
