@@ -24,8 +24,3 @@ app.add_middleware(
 @app.get("/", tags=["root"])
 async def read_root() -> dict:
     return {"message": "Welcome."}
-
-
-@app.post("/", tags=["root"])
-async def login(id: str, password: str) -> None:
-    return checkValidation(id, password)
