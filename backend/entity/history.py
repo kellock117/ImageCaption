@@ -17,6 +17,7 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
+database = firebase.database()
 
 
 def saveHistory(image, text):
@@ -27,7 +28,6 @@ def saveHistory(image, text):
         storage = firebase.storage()
         storage.child("images/" + filename).put(image)
         # save the history information which contains file name and caption
-        database = firebase.database()
         database.child("History").push(
             {"filename": filename, "caption": caption})
     except e:
@@ -35,6 +35,13 @@ def saveHistory(image, text):
 
     return True
 
+
+def viewHistory():
+    data = database.child("History").get()
+    print(data.val())
+
+
+viewHistory()
 
 # filename = "test.jpg"
 # cfilename = filename + str(time.time())
