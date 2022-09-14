@@ -3,7 +3,7 @@
 ## dependencies
 
 frontend / npm install
-backend / pip install uvicorn fastapi
+backend / pip install uvicorn fastapi python-dotenv translators
 
 ## Add your files
 
