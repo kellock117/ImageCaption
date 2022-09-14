@@ -2,7 +2,7 @@
 
 ## dependencies
 
-frontend / npm install
+frontend / npm install <br />
 backend / pip install uvicorn fastapi python-dotenv translators
 
 ## Add your files
@@ -17,4 +17,5 @@ git clone -b [branch-name] --single-branch https://gitlab.com/uowfyp/show-and-te
 ```
 
 ## Reference
+
 https://github.com/WebDevSimplified/React-Firebase-Auth (Authentication)

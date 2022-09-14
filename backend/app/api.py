@@ -1,8 +1,8 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 
-from history.controller.py import apiSaveData
-from captioning.py import caption
+from backend.controller.history_controller.py import apiSaveData, apiViewHistory
+from backend.controller.captioning_controller.py import caption
 
 
 app = FastAPI()
@@ -30,8 +30,13 @@ async def read_root() -> dict:
 @app.post("/captioning")
 async def caption(image: UploadFile = File(...)) -> str:
     # produce the caption
-    caption = caption(image)
+    caption = apiCaption(image)
     # save the image and caption information
-    apiSaveData(image, caption)
+    status = apiSaveData(image, caption)
 
-    return caption
+    return caption if status else "Something went wrong"
+
+
+@app.get("/history")
+async def history() -> list:
+    return apiViewHistory()
