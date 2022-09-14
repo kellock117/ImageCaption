@@ -1,14 +1,16 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+
+import { AuthProvider } from "./utils/authContext";
 import Admin from "./pages/admin.js";
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <Routes>
         <Route path="/admin" element={<Admin />} />
       </Routes>
-    </div>
+    </AuthProvider>
   );
 }
 
