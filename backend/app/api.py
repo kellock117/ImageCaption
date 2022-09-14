@@ -22,6 +22,11 @@ app.add_middleware(
 )
 
 
+@app.get("/", tags=["root"])
+async def read_root() -> dict:
+    return {"message": "Welcome."}
+
+
 @app.post("/captioning")
 async def caption(image: UploadFile = File(...)) -> str:
     # produce the caption
