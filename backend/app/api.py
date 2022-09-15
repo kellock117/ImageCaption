@@ -1,15 +1,17 @@
+import sys
+sys.path.append('C:/Users/docto/vscodeProject/fyp/backend/controller')
+
+from captioning_controller import apiCaption
+from history_controller import apiSaveData, apiViewHistory
+from translation_contorller import apiTranslateLang
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-
-from backend.controller.history_controller.py import apiSaveData, apiViewHistory
-from backend.controller.captioning_controller.py import caption
 
 
 app = FastAPI()
 
 origins = [
-    "http://localhost:3000",
-    "localhost:3000"
+    "*"
 ]
 
 
@@ -39,4 +41,9 @@ async def caption(image: UploadFile = File(...)) -> str:
 
 @app.get("/history")
 async def history() -> list:
-    return apiViewHistory()
+    return await apiViewHistory()
+
+
+@app.post("/translate")
+async def translate(text: str, translateTo: str) -> str:
+    return await apiTranslateLang(text, translateTo)

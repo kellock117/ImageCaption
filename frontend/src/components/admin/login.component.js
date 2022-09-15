@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../../utils/authContext";
 
 export default function Login() {
+  // initialize variables
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
@@ -14,8 +15,10 @@ export default function Login() {
     try {
       setError("");
       setLoading(true);
+      // try to login
       await login(emailRef.current.value, passwordRef.current.value);
     } catch {
+      // set error if login failed
       setError("Invalid input");
     }
 
@@ -48,7 +51,7 @@ export default function Login() {
       <div className="d-grid">
         <button
           disabled={loading}
-          onClick={handleSubmit}
+          onClick={handleSubmit} // manage the submit when the button is clicked
           className="btn btn-primary"
         >
           Submit

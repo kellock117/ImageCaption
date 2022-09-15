@@ -1,15 +1,16 @@
-from entity.history import saveHistory, viewHistory
+import sys
+sys.path.append('C:/Users/docto/vscodeProject/fyp/backend/entity')
+
+from history import saveHistory, viewHistory
 
 
-def apiSaveData(image, text) -> bool:
+async def apiSaveData(image, text) -> bool:
     # to avoid duplicated filename, concatenate timestamp after the file name
-    return saveHistory(image, text)
+    return await saveHistory(image, text)
 
 
-def apiViewHistory() -> list:
+async def apiViewHistory() -> list:
     data = viewHistory()
-
+    
     return data
 
-
-print(apiViewHistory())

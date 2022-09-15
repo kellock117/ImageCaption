@@ -21,15 +21,15 @@ storage = firebase.storage()
 database = firebase.database()
 
 
-def saveHistory(image, text: str) -> bool:
+async def saveHistory(image, text: str) -> bool:
     try:
         # to avoid duplicated filename, concatenate timestamp after the file name
         fileNameWithTimestamp = str(time.time()) + image.filename.split('.')[0]
         # save the image to the storage
-        storage.child("images/" + fileNameWithTimestamp).put(image)
+        await storage.child("images/" + fileNameWithTimestamp).put(image)
 
         # save the history information which contains file name and caption
-        database.child("history").child(fileNameWithTimestamp).set(text)
+        await database.child("history").child(fileNameWithTimestamp).set(text)
     except e:
         print(e)
 
@@ -50,9 +50,6 @@ def viewHistory() -> list:
         data.append({"image": image, "caption": caption})
 
     return data
-
-
-viewHistory()
 
 # file = "test.jpg"
 # filename, fileType = file.split('.')
