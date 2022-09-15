@@ -31,7 +31,8 @@ export default function History() {
       <ul>
         {history.map(val => (
           <li key={val.image}>
-            <img src={val.image} height="300" width="300" /> {val.caption}
+            <img src={val.image} alt="img" height="300" width="300" />{" "}
+            {val.caption}
           </li>
         ))}
       </ul>

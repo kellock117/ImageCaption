@@ -26,7 +26,7 @@ export default function Login() {
   }
 
   return (
-    <form action="#">
+    <div>
       <h3>Sign In</h3>
       <div className="mb-3">
         <label>Email address</label>
@@ -58,6 +58,6 @@ export default function Login() {
         </button>
       </div>
       {error}
-    </form>
+    </div>
   );
 }
