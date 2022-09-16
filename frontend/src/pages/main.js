@@ -13,6 +13,11 @@ export default function Captioning() {
   const onSubmit = output => {
     setResult(output);
   };
+  const reset = () => {
+    console.log("reset");
+    setImage(null);
+    setResult(null);
+  };
 
   return (
     <div className="App">
@@ -21,6 +26,7 @@ export default function Captioning() {
         <DropZone onDrop={onDrop} />
         {/* give the image file to fetch it to the server */}
         <SubmitButton image={image} onSubmit={onSubmit} />
+        <button onClick={reset}>Reset</button>
       </div>
       {/* display the result */}
       <Output output={result} onSubmit={onSubmit} />
