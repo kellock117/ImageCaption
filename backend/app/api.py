@@ -1,15 +1,17 @@
+import sys
+sys.path.append('C:/Users/docto/vscodeProject/fyp/backend/controller')
+
+from captioning_controller import apiCaption
+from history_controller import apiSaveData, apiViewHistory
+from translation_contorller import apiTranslateLang
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-
-from history.controller.py import apiSaveData
-from captioning.py import caption
 
 
 app = FastAPI()
 
 origins = [
-    "http://localhost:3000",
-    "localhost:3000"
+    "*"
 ]
 
 
@@ -22,11 +24,26 @@ app.add_middleware(
 )
 
 
+@app.get("/", tags=["root"])
+async def read_root() -> dict:
+    return {"message": "Welcome."}
+
+
 @app.post("/captioning")
 async def caption(image: UploadFile = File(...)) -> str:
     # produce the caption
-    caption = caption(image)
+    caption = apiCaption(image)
     # save the image and caption information
-    apiSaveData(image, caption)
+    status = apiSaveData(image, caption)
 
-    return caption
+    return caption if status else "Something went wrong"
+
+
+@app.get("/history")
+async def history() -> list:
+    return await apiViewHistory()
+
+
+@app.post("/translate")
+async def translate(text: str, translateTo: str) -> str:
+    return await apiTranslateLang(text, translateTo)

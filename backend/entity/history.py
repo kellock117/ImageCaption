@@ -17,29 +17,44 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
+storage = firebase.storage()
+database = firebase.database()
 
 
-def saveHistory(image, text):
+async def saveHistory(image, text: str) -> bool:
     try:
         # to avoid duplicated filename, concatenate timestamp after the file name
-        filename = image.filename + str(time.time())
+        fileNameWithTimestamp = str(time.time()) + image.filename.split('.')[0]
         # save the image to the storage
-        storage = firebase.storage()
-        storage.child("images/" + filename).put(image)
+        await storage.child("images/" + fileNameWithTimestamp).put(image)
+
         # save the history information which contains file name and caption
-        database = firebase.database()
-        database.child("History").push(
-            {"filename": filename, "caption": caption})
+        await database.child("history").child(fileNameWithTimestamp).set(text)
     except e:
         print(e)
 
     return True
 
 
-# filename = "test.jpg"
-# cfilename = filename + str(time.time())
-# storage = firebase.storage()
-# storage.child("images/" + cfilename).put(filename)
-# database = firebase.database()
-# database.child("History").push(
-#     {"filename": cfilename, "caption": "fffffffffddfdf"})
+def viewHistory() -> list:
+    data = []
+
+    # scrap all of the history information from the database
+    historyInfo = database.child("History").get()
+
+    for history in historyInfo.each():
+        key = history.key()
+        caption = history.val()
+        image = storage.child("images/" + key).get_url(None)
+
+        data.append({"image": image, "caption": caption})
+
+    return data
+
+# file = "test.jpg"
+# filename, fileType = file.split('.')
+# cfilename = str(time.time()).split('.')[0] + filename
+
+# storage.child("images/" + cfilename).put(file)
+
+# database.child("History").child(cfilename).set("33333333333333")
