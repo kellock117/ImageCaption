@@ -21,17 +21,14 @@ storage = firebase.storage()
 database = firebase.database()
 
 
-async def saveHistory(image, text: str) -> bool:
-    try:
-        # to avoid duplicated filename, concatenate timestamp after the file name
-        fileNameWithTimestamp = str(time.time()) + image.filename.split('.')[0]
-        # save the image to the storage
-        await storage.child("images/" + fileNameWithTimestamp).put(image)
+def saveHistory(image, text: str) -> bool:
+    # to avoid duplicated filename, concatenate timestamp after the file name
+    fileNameWithTimestamp = str(time.time()).split('.')[0] + image.filename.split('.')[0]
+    # save the image to the storage
+    storage.child("images/" + fileNameWithTimestamp).put(image.file)
 
-        # save the history information which contains file name and caption
-        await database.child("history").child(fileNameWithTimestamp).set(text)
-    except Exception as e:
-        print(e)
+    # save the history information which contains file name and caption
+    database.child("history").child(fileNameWithTimestamp).set(text)
 
     return True
 
