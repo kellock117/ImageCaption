@@ -6,14 +6,13 @@ from history_controller import apiSaveData, apiViewHistory
 from translation_contorller import apiTranslateLang
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi import Body
 
 app = FastAPI()
 
 origins = [
     "*"
 ]
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,12 +23,12 @@ app.add_middleware(
 )
 
 @app.post("/caption")
-async def caption(image: UploadFile = File(...)) -> str:
+def caption(image: UploadFile = File(...)) -> str:
     # produce the caption
     caption = apiCaption(image)
 
     # save the image and caption information
-    status = await apiSaveData(image, caption)
+    status = apiSaveData(image, caption)
 
     return caption if status else "Something went wrong"
 
@@ -40,5 +39,5 @@ async def history() -> list:
 
 
 @app.post("/translate")
-async def translate(text: str, translateTo: str) -> str:
-    return await apiTranslateLang(text, translateTo)
+def translate(text: str = Body(), translateTo: str = Body()) -> str:
+    return apiTranslateLang(text, translateTo)
