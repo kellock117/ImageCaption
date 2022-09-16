@@ -30,7 +30,7 @@ async def saveHistory(image, text: str) -> bool:
 
         # save the history information which contains file name and caption
         await database.child("history").child(fileNameWithTimestamp).set(text)
-    except e:
+    except Exception as e:
         print(e)
 
     return True
