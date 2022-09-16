@@ -23,18 +23,13 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-
-@app.get("/", tags=["root"])
-async def read_root() -> dict:
-    return {"message": "Welcome."}
-
-
-@app.post("/captioning")
+@app.post("/caption")
 async def caption(image: UploadFile = File(...)) -> str:
     # produce the caption
     caption = apiCaption(image)
+
     # save the image and caption information
-    status = apiSaveData(image, caption)
+    status = await apiSaveData(image, caption)
 
     return caption if status else "Something went wrong"
 
