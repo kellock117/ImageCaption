@@ -4,6 +4,6 @@ def apiCaption(image):
     elif (image.filename == "800px-Supreme_pizza.jpg"):
         return "The picture of pizza"
     else:
-        return "red and white balles"
+        return "Image"
 
     return caption
