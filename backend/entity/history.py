@@ -40,7 +40,7 @@ def viewHistory() -> list:
     data = []
 
     # scrap all of the history information from the database
-    historyInfo = database.child("History").get()
+    historyInfo = database.child("history").get()
 
     for history in historyInfo.each():
         key = history.key()
