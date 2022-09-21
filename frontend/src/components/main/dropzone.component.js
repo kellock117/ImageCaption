@@ -23,12 +23,11 @@ const btnStyle = {
 };
 
 export default function DropZone({ onDrop, open }) {
-  const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
     accept: { "image/*": [] },
     onDrop,
   });
-  const file = acceptedFiles[0] || null;
 
   return (
     <div {...getRootProps({ className: "dropzone" })} style={bodyStyle}>
@@ -39,9 +38,6 @@ export default function DropZone({ onDrop, open }) {
       <button type="button" onClick={open} className="btn" style={btnStyle}>
         Click here to select images
       </button>
-      <div>
-        <ul>{file ? <li>{file.name}</li> : null}</ul>
-      </div>
     </div>
   );
 }

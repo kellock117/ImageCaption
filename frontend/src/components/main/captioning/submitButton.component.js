@@ -11,7 +11,6 @@ export default function SubmitButton({ image, onSubmit }) {
     })
       .then(response => response.json())
       .then(result => {
-        console.log("Caption:", result);
         onSubmit(result);
       })
       .catch(error => {
