@@ -16,7 +16,7 @@ export default function Captioning() {
     setResult(output);
     setLanguage(languague);
   };
-  const reset = () => {
+  const clear = () => {
     setImage(null);
     setResult(null);
   };
@@ -28,7 +28,7 @@ export default function Captioning() {
         <DropZone onDrop={onDrop} />
         {/* give the image file to fetch it to the server */}
         <SubmitButton image={image} onSubmit={onSubmit} />
-        <button onClick={reset}>Reset</button>
+        <button onClick={clear}>Clear</button>
       </div>
       {/* display the result */}
       <Output output={result} language={language} onSubmit={onSubmit} />
