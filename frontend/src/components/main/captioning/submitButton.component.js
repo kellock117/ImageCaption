@@ -5,6 +5,10 @@ export default function SubmitButton({ image, onSubmit }) {
     let formData = new FormData();
     formData.append("image", image);
 
+    const selected = document.getElementById("strategy");
+    const strategy = selected.options[selected.selectedIndex].value;
+    formData.append("strategy", strategy);
+
     await fetch("/caption", {
       method: "POST",
       body: formData,
@@ -19,6 +23,12 @@ export default function SubmitButton({ image, onSubmit }) {
   };
   return (
     <div>
+      <select id="strategy">
+        <option value="BeamSearch" defaultValue>
+          Beam Search
+        </option>
+        <option value="NucleusSampling">Nucleus Sampling</option>
+      </select>
       <button disabled={!image} onClick={handleSubmission}>
         Submit
       </button>

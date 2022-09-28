@@ -3,7 +3,7 @@ from controller.history_controller import apiSaveData, apiViewHistory
 from controller.translation_contorller import apiTranslateLang
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import Body
+from fastapi import Form, Body
 
 app = FastAPI()
 
@@ -21,11 +21,10 @@ app.add_middleware(
 
 
 @app.post("/caption")
-async def caption(image: UploadFile = File(...)) -> str:
+async def caption(image: UploadFile = File(...), strategy: str = Form()) -> str:
     readImage = await image.read()
-
     # produce the caption
-    caption = apiCaption(readImage)
+    caption = apiCaption(readImage, strategy)
     
     # save the image and caption information
     status = apiSaveData(image, caption)
