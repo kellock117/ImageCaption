@@ -1,9 +1,6 @@
-import sys
-sys.path.append('C:/Users/docto/vscodeProject/fyp/backend/controller')
-
-from captioning_controller import apiCaption
-from history_controller import apiSaveData, apiViewHistory
-from translation_contorller import apiTranslateLang
+from controller.captioning_controller import apiCaption
+from controller.history_controller import apiSaveData, apiViewHistory
+from controller.translation_contorller import apiTranslateLang
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Body
@@ -22,11 +19,14 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.post("/caption")
-def caption(image: UploadFile = File(...)) -> str:
-    # produce the caption
-    caption = apiCaption(image)
 
+@app.post("/caption")
+async def caption(image: UploadFile = File(...)) -> str:
+    readImage = await image.read()
+
+    # produce the caption
+    caption = apiCaption(readImage)
+    
     # save the image and caption information
     status = apiSaveData(image, caption)
 

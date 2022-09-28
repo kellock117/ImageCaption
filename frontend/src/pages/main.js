@@ -6,12 +6,15 @@ import Output from "../components/main/output.component";
 export default function Captioning() {
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
+  const [language, setLanguage] = useState("en");
+
   const onDrop = acceptedFiles => {
     const file = acceptedFiles[0];
     setImage(file);
   };
-  const onSubmit = output => {
+  const onSubmit = (output, languague) => {
     setResult(output);
+    setLanguage(languague);
   };
   const reset = () => {
     setImage(null);
@@ -28,7 +31,7 @@ export default function Captioning() {
         <button onClick={reset}>Reset</button>
       </div>
       {/* display the result */}
-      <Output output={result} onSubmit={onSubmit} />
+      <Output output={result} language={language} onSubmit={onSubmit} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
-import sys
-sys.path.append('C:/Users/docto/vscodeProject/fyp/backend/entity')
+# import sys
+# sys.path.append('C:/Users/docto/vscodeProject/fyp/backend/entity')
 
-from history import saveHistory, viewHistory
+from entity.history import saveHistory, viewHistory
 
 
 def apiSaveData(image, text) -> bool:

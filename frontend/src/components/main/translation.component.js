@@ -18,7 +18,7 @@ export default function translation({ text, onSubmit }) {
     })
       .then(response => response.json())
       .then(result => {
-        onSubmit(result);
+        onSubmit(result, translateTo);
       });
   };
   return (

@@ -11,7 +11,7 @@ export default function SubmitButton({ image, onSubmit }) {
     })
       .then(response => response.json())
       .then(result => {
-        onSubmit(result);
+        onSubmit(result, "en");
       })
       .catch(error => {
         console.error("Error:", error);
