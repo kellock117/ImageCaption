@@ -1,6 +1,5 @@
 from PIL import Image
 from io import BytesIO
-import requests
 import torch
 from torchvision import transforms
 from torchvision.transforms.functional import InterpolationMode
@@ -21,15 +20,15 @@ model = blip_decoder(pretrained=modelUrl, image_size=384, vit='large')
 model.eval()
 model = model.to(device)
 
-def apiCaption(rawImage):
+def apiCaption(rawImage, strategy: str):
     convertedImage = Image.open(BytesIO(rawImage))
     image = transform(convertedImage).unsqueeze(0).to(device)   
 
     with torch.no_grad():
-        # if strategy == "Beam search":
-        # caption = model.generate(image, sample=False, num_beams=3, max_length=20, min_length=5)
-        # else:
-        caption = model.generate(image, sample=True, top_p=0.9, max_length=20, min_length=5)
+        if strategy == "BeamSearch":
+            caption = model.generate(image, sample=False, num_beams=3, max_length=20, min_length=5)
+        elif strategy == "NucleusSampling":
+            caption = model.generate(image, sample=True, top_p=0.9, max_length=20, min_length=5)
         
         return caption[0]
 
