@@ -10,7 +10,11 @@ export default function Captioning() {
 
   const onDrop = acceptedFiles => {
     const file = acceptedFiles[0];
-    setImage(file);
+    setImage(
+      Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      })
+    );
   };
   const onSubmit = (output, languague) => {
     setResult(output);
@@ -25,7 +29,7 @@ export default function Captioning() {
     <div className="App">
       <div className="auth-inner">
         {/* retreive the image from the DropZone component */}
-        <DropZone onDrop={onDrop} />
+        <DropZone onDrop={onDrop} image={image} />
         {/* give the image file to fetch it to the server */}
         <SubmitButton image={image} onSubmit={onSubmit} />
         <button onClick={clear}>Clear</button>

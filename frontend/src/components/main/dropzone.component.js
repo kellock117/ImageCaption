@@ -22,22 +22,39 @@ const btnStyle = {
   transitionDuration: "0.5s",
 };
 
-export default function DropZone({ onDrop, open }) {
+export default function DropZone({ onDrop, open, image }) {
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
     accept: { "image/*": [] },
     onDrop,
   });
 
+  const preview = image ? (
+    <img
+      alt={image.path}
+      src={image.preview}
+      // Revoke data uri after image is loaded
+      onLoad={() => {
+        URL.revokeObjectURL(image.preview);
+      }}
+    />
+  ) : null;
+
   return (
     <div {...getRootProps({ className: "dropzone" })} style={bodyStyle}>
       <input className="input-zone" {...getInputProps()} />
-      <div className="text-center">
-        <p className="dropzone-content">Drag and drop an image here</p>
-      </div>
-      <button type="button" onClick={open} className="btn" style={btnStyle}>
-        Click here to select images
-      </button>
+      {preview ? (
+        preview
+      ) : (
+        <div>
+          <div className="text-center">
+            <p className="dropzone-content">Drag and drop an image here</p>
+          </div>
+          <button type="button" onClick={open} className="btn" style={btnStyle}>
+            Click here to select images
+          </button>
+        </div>
+      )}
     </div>
   );
 }

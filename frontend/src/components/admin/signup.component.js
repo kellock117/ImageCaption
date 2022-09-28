@@ -1,25 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 export default class SignUp extends Component {
   render() {
     return (
       <form>
         <h3>Sign Up</h3>
-        <div className="mb-3">
-          <label>First Name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="First Name"
-          /> 
-        </div>
-        <div className = "mb-3">
-          <label>Last Name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="First Name"
-          /> 
-        </div>
         <div className="mb-3">
           <label>Email address</label>
           <input
@@ -45,6 +29,6 @@ export default class SignUp extends Component {
           Already registered <a href="/sign-in">sign in?</a>
         </p>
       </form>
-    )
+    );
   }
 }
