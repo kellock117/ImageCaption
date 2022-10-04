@@ -4,7 +4,7 @@
 
 python version: 3.8.13
 frontend / npm install <br />
-backend / pip install uvicorn fastapi python-dotenv translators torch torchvision requests pillow transformers(4.15.0) timm fairscale
+backend / pip install uvicorn fastapi python-dotenv translators torch torchvision requests pillow transformers(4.15.0) timm fairscale python-multipart
 
 ## Add your files
 
