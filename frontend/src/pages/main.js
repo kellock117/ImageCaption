@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DropZone from "../components/main/dropzone.component";
 import SubmitButton from "../components/main/captioning/submitButton.component";
 import Output from "../components/main/output.component";
+import SampleImage from "../components/main/sampleIamge.component";
 
 export default function Captioning() {
   const [image, setImage] = useState(null);
@@ -20,6 +21,17 @@ export default function Captioning() {
     setResult(output);
     setLanguage(languague);
   };
+  const onClick = event => {
+    fetch(event.target.alt)
+      .then(res => res.blob())
+      .then(file =>
+        setImage(
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+  };
   const clear = () => {
     setImage(null);
     setResult(null);
@@ -36,6 +48,7 @@ export default function Captioning() {
       </div>
       {/* display the result */}
       <Output output={result} language={language} onSubmit={onSubmit} />
+      <SampleImage onClick={onClick} />
     </div>
   );
 }
