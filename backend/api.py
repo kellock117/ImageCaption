@@ -1,6 +1,8 @@
 from controller.captioning_controller import apiCaption
-from controller.history_controller import apiSaveData, apiViewHistory
+from controller.history_controller import apiSaveData, apiSaveVQAData, apiViewHistory
 from controller.translation_contorller import apiTranslateLang
+from controller.vqa_controller import apiVQA
+
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Form, Body
@@ -30,6 +32,16 @@ async def caption(image: UploadFile = File(...), strategy: str = Form()) -> str:
     status = apiSaveData(image, caption)
 
     return caption if status else "Something went wrong"
+
+
+@app.post("/vqa")
+async def vqa(image: UploadFile = File(...), question: str = Form()) -> str:
+    readImage = await image.read()
+    answer = apiVQA(readImage, question) 
+
+    status = apiSaveVQAData(image, str(question), answer)
+
+    return answer if status else "Something went wrong"
 
 
 @app.get("/history")
