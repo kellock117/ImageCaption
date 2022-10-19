@@ -33,6 +33,18 @@ def saveHistory(image, text: str) -> bool:
     return True
 
 
+def saveVQAHistory(image, question: str, answer: str) -> bool:
+    # to avoid duplicated filename, concatenate timestamp after the file name
+    fileNameWithTimestamp = str(time.time()).split('.')[0] + image.filename.split('.')[0]
+    # save the image to the storage
+    storage.child("images/" + fileNameWithTimestamp).put(image.file)
+
+    # save the history information which contains file name and caption
+    database.child("vqa").child(fileNameWithTimestamp).set({"question": question, "answer": answer})
+
+    return True
+
+
 def viewHistory() -> list:
     data = []
 
@@ -48,10 +60,9 @@ def viewHistory() -> list:
 
     return data
 
-# file = "test.jpg"
-# filename, fileType = file.split('.')
-# cfilename = str(time.time()).split('.')[0] + filename
 
-# storage.child("images/" + cfilename).put(file)
+def viewVQAHistory() -> list:
+    # scrap all of the history information from the database
+    VQAInfo = database.child("vqa").get()
 
-# database.child("History").child(cfilename).set("33333333333333")
+    return VQAInfo
