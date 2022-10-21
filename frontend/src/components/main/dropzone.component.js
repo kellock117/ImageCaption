@@ -1,5 +1,6 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import "./css/dropzone.css"
 
 // css for body
 const bodyStyle = {
