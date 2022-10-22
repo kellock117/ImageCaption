@@ -1,8 +1,7 @@
 import React from "react";
 
 const audioButton = {
-  color: 'black',
-  border: '1px solid grey',
+  border: '1px solid #ccc',
   borderRadius: '8px',
   width: '180px',
   marginTop: '5px',

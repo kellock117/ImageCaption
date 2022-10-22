@@ -1,19 +1,16 @@
 import React from "react";
 
 const translateButton = {
-  color: 'black',
-  border: '1px solid grey',
+  border: '1px solid #ccc',
   borderRadius: '8px',
   marginLeft: '5px',
 }
 
 const selectStyle = {
-  color: 'black',
-  border: '1px solid grey',
+  border: '1px solid #ccc',
   borderRadius: '8px',
   padding: '1px',
   width: '100px',
-  
 }
 
 export default function translation({ text, onSubmit }) {
