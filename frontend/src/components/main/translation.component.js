@@ -1,5 +1,21 @@
 import React from "react";
 
+const translateButton = {
+  color: 'black',
+  border: '1px solid grey',
+  borderRadius: '8px',
+  marginLeft: '5px',
+}
+
+const selectStyle = {
+  color: 'black',
+  border: '1px solid grey',
+  borderRadius: '8px',
+  padding: '1px',
+  width: '100px',
+  
+}
+
 export default function translation({ text, onSubmit }) {
   const handleSubmission = async () => {
     const selected = document.getElementById("language");
@@ -23,8 +39,8 @@ export default function translation({ text, onSubmit }) {
   };
   return (
     <div>
-      <p>translate to: </p>
-      <select id="language">
+      <p>Choose a language to translate to : </p>
+      <select style={selectStyle} id="language">
         <option value="en" defaultValue>
           English
         </option>
@@ -32,7 +48,7 @@ export default function translation({ text, onSubmit }) {
         <option value="ko">Korean</option>
         <option value="ja">Japanese</option>
       </select>
-      <button disabled={!text} onClick={handleSubmission}>
+      <button style={translateButton} disabled={!text} onClick={handleSubmission}>
         Translate
       </button>
     </div>
