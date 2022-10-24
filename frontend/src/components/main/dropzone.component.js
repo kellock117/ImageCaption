@@ -1,5 +1,6 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import "./css/dropzone.css"
 
 import CropImage from "./cropImage.component";
 
@@ -7,20 +8,19 @@ import CropImage from "./cropImage.component";
 const bodyStyle = {
   textAlign: "center",
   padding: "21px",
-  border: "4px black dashed",
-  width: "70%",
+  border: "2px black dashed",
+  width: "90%",
   margin: "auto",
 };
 
 //css for button
 const btnStyle = {
-  border: "none",
+  border: "1px solid #ccc",
   textAlign: "center",
-  backgroundColor: "rgb(218, 216, 216)",
-  height: "51px",
+  backgroundColor: "white",
+  height: "40px",
   borderRadius: "11px",
   color: "black",
-  fontWeight: "bold",
   transitionDuration: "0.5s",
 };
 
