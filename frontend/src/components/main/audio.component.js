@@ -1,5 +1,12 @@
 import React from "react";
 
+const audioButton = {
+  border: '1px solid #ccc',
+  borderRadius: '8px',
+  width: '180px',
+  marginTop: '5px',
+}
+
 export default function Audio({ text, language }) {
   var voices = [];
   function setVoiceList() {
@@ -44,8 +51,8 @@ export default function Audio({ text, language }) {
 
   return (
     <div>
-      <button disabled={!text} onClick={tts}>
-        Voice Out
+      <button style={audioButton} disabled={!text} onClick={tts}>
+        Listen
       </button>
     </div>
   );
