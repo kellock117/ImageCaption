@@ -1,5 +1,5 @@
 from controller.captioning_controller import apiCaption
-from controller.history_controller import apiSaveData, apiSaveVQAData, apiViewHistory
+from controller.history_controller import apiSaveData, apiSaveVQAData, apiViewHistory, apiViewVQAHistory
 from controller.translation_contorller import apiTranslateLang
 from controller.vqa_controller import apiVQA
 
@@ -47,6 +47,11 @@ async def vqa(image: UploadFile = File(...), question: str = Form()) -> str:
 @app.get("/history")
 async def history() -> list:
     return await apiViewHistory()
+
+
+@app.get("/vqaHistory")
+async def VQAHistory() -> list:
+    return await apiViewVQAHistory()
 
 
 @app.post("/translate")
