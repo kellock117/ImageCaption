@@ -58,7 +58,7 @@ export default function Captioning() {
       <div className="auth-inner">
         {/* retreive the image from the DropZone component */}
         <DropZone onDrop={onDrop} image={image} />
-        {feature == "vqa" ? (
+        {feature === "vqa" ? (
           <input type="text" id="question" onChange={onChange} />
         ) : null}
         <SubmitButton image={image} question={question} onSubmit={onSubmit} />
