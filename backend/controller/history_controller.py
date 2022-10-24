@@ -10,9 +10,9 @@ def apiSaveData(image, text: str) -> bool:
 def apiSaveVQAData(image, question: str, answer: str) -> bool:
     return saveVQAHistory(image, question, answer)
 
-async def apiViewHistory() -> list:    
+async def apiViewHistory() -> list:
     return viewHistory()
 
 async def apiViewVQAHistory() -> list:
-    return viewVQAHistory
+    return viewVQAHistory()
 

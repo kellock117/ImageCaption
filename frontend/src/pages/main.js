@@ -12,14 +12,19 @@ export default function Captioning() {
   const [feature, setFeature] = useState("captioning");
   const [question, setQuestion] = useState(null);
 
+  // save the image file when user drop the image to the drop zone
   const onDrop = acceptedFiles => {
     const file = acceptedFiles[0];
-    setImage(
-      Object.assign(file, {
-        preview: URL.createObjectURL(file),
-      })
-    );
+    // const reader = new FileReader();
+    // setImage(
+    //   Object.assign(file, {
+    //     preview: URL.createObjectURL(file),
+    //   })
+    // );
+    setImage(URL.createObjectURL(file));
   };
+
+  // save the result of captioning or visual question answering after submission
   const onSubmit = (output, languague) => {
     setResult(output);
     setLanguage(languague);
@@ -35,10 +40,12 @@ export default function Captioning() {
         )
       );
   };
+  // clear the image and result
   const clear = () => {
     setImage(null);
     setResult(null);
   };
+  // detect the change in question for VQA
   const onChange = event => {
     setQuestion(event.target.value);
   };
@@ -59,7 +66,7 @@ export default function Captioning() {
       </div>
       <div className="auth-inner">
         {/* retreive the image from the DropZone component */}
-        <DropZone onDrop={onDrop} image={image} />
+        <DropZone onDrop={onDrop} image={image} setImage={setImage} />
         {feature === "vqa" ? (
           <input type="text" id="question" onChange={onChange} />
         ) : null}
