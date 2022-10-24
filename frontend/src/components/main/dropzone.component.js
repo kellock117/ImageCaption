@@ -6,20 +6,19 @@ import "./css/dropzone.css"
 const bodyStyle = {
   textAlign: "center",
   padding: "21px",
-  border: "4px black dashed",
-  width: "70%",
+  border: "2px black dashed",
+  width: "90%",
   margin: "auto",
 };
 
 //css for button
 const btnStyle = {
-  border: "none",
+  border: "1px solid #ccc",
   textAlign: "center",
-  backgroundColor: "rgb(218, 216, 216)",
-  height: "51px",
+  backgroundColor: "white",
+  height: "40px",
   borderRadius: "11px",
   color: "black",
-  fontWeight: "bold",
   transitionDuration: "0.5s",
 };
 
@@ -50,6 +49,7 @@ export default function DropZone({ onDrop, open, image }) {
         <div>
           <div className="text-center">
             <p className="dropzone-content">Drag and drop an image here</p>
+            <p>- OR -</p>
           </div>
           <button type="button" onClick={open} className="btn" style={btnStyle}>
             Click here to select images
