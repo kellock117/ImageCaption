@@ -3,6 +3,7 @@ import DropZone from "../components/main/dropzone.component";
 import SubmitButton from "../components/main/submitButton.component";
 import Output from "../components/main/output.component";
 import SampleImage from "../components/main/sampleIamge.component";
+import Navbar from "../components/main/mainnavbar.component";
 
 export default function Captioning() {
   const [image, setImage] = useState(null);
@@ -44,6 +45,7 @@ export default function Captioning() {
 
   return (
     <div className="App">
+      <Navbar />
       <div
         onChange={event => {
           setFeature(event.target.value);

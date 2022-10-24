@@ -3,7 +3,7 @@
   box-sizing: border-box;
 }
 body {
-  background: #1C8EF9 !important;
+  background: #EDEAE0 !important;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
@@ -18,7 +18,6 @@ h1,h2,h3,h4,h5,h6,label,span {
 body, html, .App, #root, .auth-wrapper {
   width: 100%;
   height: 100%;
-  padding: 2%;
 }
 
 .navbar-light {
