@@ -15,13 +15,7 @@ export default function Captioning() {
   // save the image file when user drop the image to the drop zone
   const onDrop = acceptedFiles => {
     const file = acceptedFiles[0];
-    // const reader = new FileReader();
-    // setImage(
-    //   Object.assign(file, {
-    //     preview: URL.createObjectURL(file),
-    //   })
-    // );
-    setImage(URL.createObjectURL(file));
+    setImage(file);
   };
 
   // save the result of captioning or visual question answering after submission
@@ -29,22 +23,20 @@ export default function Captioning() {
     setResult(output);
     setLanguage(languague);
   };
+
+  // display sample image
   const onClick = event => {
     fetch(event.target.alt)
       .then(res => res.blob())
-      .then(file =>
-        setImage(
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
+      .then(file => setImage(file));
   };
+
   // clear the image and result
   const clear = () => {
     setImage(null);
     setResult(null);
   };
+
   // detect the change in question for VQA
   const onChange = event => {
     setQuestion(event.target.value);

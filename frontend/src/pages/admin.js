@@ -11,8 +11,16 @@ export default function Admin() {
   return (
     <div className="App">
       <NavBar />
-      <div className="auth-inner">{currentUser ? <History /> : <Login />}</div>
-      <VQAHistory />
+      <div className="auth-inner">
+        {currentUser ? (
+          <>
+            <History />
+            <VQAHistory />
+          </>
+        ) : (
+          <Login />
+        )}
+      </div>
     </div>
   );
 }
