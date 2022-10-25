@@ -30,3 +30,4 @@ def apiVQA(rawImage, question:str):
         answer = model_vq(image_vq, question, train=False, inference='generate') 
 
     return answer[0]
+    

@@ -16,30 +16,28 @@ config = {
     "measurementId": os.getenv("MEASUREMENT_ID")
 }
 
+
 firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
 database = firebase.database()
 
-
-def saveHistory(image, text: str) -> bool:
+def saveHistory(readImage, fileName: str, text: str) -> bool:
     # to avoid duplicated filename, concatenate timestamp after the file name
-    fileNameWithTimestamp = str(time.time()).split('.')[0] + image.filename
-    # save the image to the storage
-    storage.child("images/" + fileNameWithTimestamp).put(image.file)
+    fileNameWithTimestamp = str(time.time()).split('.')[0] + fileName
     # save the history information which contains file name and caption
     database.child("history").push({"fileName": fileNameWithTimestamp, "text": text})
+    # save image to storage
+    storage.child("images/" + fileNameWithTimestamp).put(readImage)
 
     return True
 
 
-def saveVQAHistory(image, question: str, answer: str) -> bool:
+def saveVQAHistory(readImage, fileName: str, question: str, answer: str) -> bool:
     # to avoid duplicated filename, concatenate timestamp after the file name
-    fileNameWithTimestamp = str(time.time()).split('.')[0] + image.filename
-    # save the image to the storage
-    storage.child("images/" + fileNameWithTimestamp).put(image.file)
-
-    # save the history information which contains file name and caption
+    fileNameWithTimestamp = str(time.time()).split('.')[0] + fileName
     database.child("vqa").push({"fileName": fileNameWithTimestamp, "question": question, "answer": answer})
+    # save image to storage
+    storage.child("images/" + fileNameWithTimestamp).put(readImage)
 
     return True
 
@@ -53,7 +51,6 @@ def viewHistory() -> list:
     for history in historyInfo.each():
         caption = history.val()
         image = storage.child("images/" + caption["fileName"]).get_url(None)
-
         data.append({"image": image, "caption": caption["text"]})
 
     return data

@@ -25,21 +25,23 @@ app.add_middleware(
 @app.post("/caption")
 async def caption(image: UploadFile = File(...), strategy: str = Form()) -> str:
     readImage = await image.read()
+
     # produce the caption
     caption = apiCaption(readImage, strategy)
     
     # save the image and caption information
-    status = apiSaveData(image, caption)
-
+    status = apiSaveData(readImage, image.filename, caption)
+    await image.close()
     return caption if status else "Something went wrong"
 
 
 @app.post("/vqa")
 async def vqa(image: UploadFile = File(...), question: str = Form()) -> str:
     readImage = await image.read()
+    
     answer = apiVQA(readImage, question) 
 
-    status = apiSaveVQAData(image, str(question), answer)
+    status = apiSaveVQAData(readImage, image.filename, str(question), answer)
 
     return answer if status else "Something went wrong"
 

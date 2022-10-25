@@ -21,3 +21,4 @@ git clone/pull -b [branch-name] --single-branch https://gitlab.com/uowfyp/show-a
 
 https://github.com/WebDevSimplified/React-Firebase-Auth (Authentication)
 https://blog.openreplay.com/create-a-drag-and-drop-zone-in-react-with-react-dropzone (drag and drop)
+https://zih0.tistory.com/42 (crop)

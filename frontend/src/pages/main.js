@@ -12,8 +12,6 @@ export default function Captioning() {
   const [feature, setFeature] = useState("captioning");
   const [question, setQuestion] = useState(null);
 
-  console.log(image);
-
   // save the image file when user drop the image to the drop zone
   const onDrop = acceptedFiles => {
     const file = acceptedFiles[0];
