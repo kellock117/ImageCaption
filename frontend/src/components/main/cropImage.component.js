@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactCrop from "react-image-crop";
 
 export default function CropImage({ image, setImage }) {
   const [crop, setCrop] = useState({ aspect: 16 / 9 });
   const [imgInfo, setImgInfo] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+
+  useEffect(() => {
+    setImageFile(URL.createObjectURL(image));
+  }, [image]);
 
   const cropImageNow = () => {
-    console.log(imgInfo);
     const canvas = document.createElement("canvas");
     const scaleX = imgInfo.naturalWidth / imgInfo.width;
     const scaleY = imgInfo.naturalHeight / imgInfo.height;
@@ -33,17 +37,22 @@ export default function CropImage({ image, setImage }) {
     );
 
     // Converting to base64
-    const base64Image = canvas.toDataURL("image/jpeg");
-    setImage(base64Image);
+    canvas.toBlob(
+      blob => {
+        setImage(new File([blob], image.name));
+      },
+      "image/jpeg",
+      0.95
+    );
   };
 
   return (
     <>
       <ReactCrop
-        src={image}
+        src={imageFile}
         onImageLoaded={setImgInfo}
         crop={crop}
-        onChange={setCrop}
+        onChange={crop => setCrop(crop)}
       />
       <button onClick={cropImageNow}>Crop</button>
     </>

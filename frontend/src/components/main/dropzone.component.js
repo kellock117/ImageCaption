@@ -1,6 +1,6 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
-import "./css/dropzone.css"
+import "./css/dropzone.css";
 
 import CropImage from "./cropImage.component";
 
