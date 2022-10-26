@@ -46,17 +46,6 @@ export default function Captioning() {
   return (
     <div className="App">
       <Navbar />
-      <div
-        onChange={event => {
-          setFeature(event.target.value);
-          setQuestion(null);
-        }}
-      >
-        <input type="radio" name="feature" value="captioning" defaultChecked />
-        Captioning
-        <input type="radio" name="feature" value="vqa" />
-        Visual Question answering
-      </div>
       <div className="parent">
         <div className="child1">
           {/* retreive the image from the DropZone component */}
@@ -73,6 +62,18 @@ export default function Captioning() {
         <div className="child2">
           <SampleImage onClick={onClick} />
         </div>
+      </div>
+      <div className="radioBtnBox"
+        onChange={event => {
+          setFeature(event.target.value);
+          setQuestion(null);
+        }}
+      >
+        <p className="radioText1">Task : </p>
+        <input type="radio" className="btn1" name="feature" value="captioning" defaultChecked />
+        Captioning
+        <input type="radio" className="btn2" name="feature" value="vqa" />
+        Visual Question answering
       </div>
       {/* display the result */}
       <Output output={result} language={language} onSubmit={onSubmit} />
