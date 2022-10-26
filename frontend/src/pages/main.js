@@ -50,10 +50,6 @@ export default function Captioning() {
         <div className="child1">
           {/* retreive the image from the DropZone component */}
           <DropZone onDrop={onDrop} image={image} />
-          {feature == "vqa" ? (
-            <input type="text" id="question" onChange={onChange} />
-          ) : null}
-          <SubmitButton image={image} question={question} onSubmit={onSubmit} />
 
           {/* give the image file to fetch it to the server */}
 
@@ -74,6 +70,14 @@ export default function Captioning() {
         Captioning
         <input type="radio" className="btn2" name="feature" value="vqa" />
         Visual Question answering
+      </div>
+      <div>   
+        <SubmitButton image={image} question={question} onSubmit={onSubmit} />
+        <div className="questionTextBoxCont">
+          <p className="questionLabel">Question : </p>
+          <input type="text" className = "questionTextBox" id="question" onChange={onChange} 
+              disabled={feature != "vqa" ? true : null}/>
+        </div>
       </div>
       {/* display the result */}
       <Output output={result} language={language} onSubmit={onSubmit} />
