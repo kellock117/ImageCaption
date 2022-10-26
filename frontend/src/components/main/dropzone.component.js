@@ -9,6 +9,7 @@ const bodyStyle = {
   border: "2px black dashed",
   width: "90%",
   margin: "auto",
+  minWidth: "300px",
 };
 
 //css for button
