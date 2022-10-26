@@ -56,21 +56,25 @@ export default function Captioning() {
         <input type="radio" name="feature" value="vqa" />
         Visual Question answering
       </div>
-      <div className="auth-inner">
-        {/* retreive the image from the DropZone component */}
-        <DropZone onDrop={onDrop} image={image} setImage={setImage} />
-        {feature === "vqa" ? (
-          <input type="text" id="question" onChange={onChange} />
-        ) : null}
-        <SubmitButton image={image} question={question} onSubmit={onSubmit} />
+      <div className="parent">
+        <div className="child1">
+          {/* retreive the image from the DropZone component */}
+          <DropZone onDrop={onDrop} image={image} />
+          {feature == "vqa" ? (
+            <input type="text" id="question" onChange={onChange} />
+          ) : null}
+          <SubmitButton image={image} question={question} onSubmit={onSubmit} />
 
-        {/* give the image file to fetch it to the server */}
+          {/* give the image file to fetch it to the server */}
 
-        <button onClick={clear}>Clear</button>
+          <button onClick={clear}>Clear</button>
+        </div>
+        <div className="child2">
+          <SampleImage onClick={onClick} />
+        </div>
       </div>
       {/* display the result */}
       <Output output={result} language={language} onSubmit={onSubmit} />
-      <SampleImage onClick={onClick} />
     </div>
   );
 }
