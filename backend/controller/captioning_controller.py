@@ -31,5 +31,3 @@ def apiCaption(rawImage, strategy: str):
             caption = model.generate(image, sample=True, top_p=0.9, max_length=20, min_length=5)
         
         return caption[0]
-
-
