@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 
 export default function CropImage({ image, setImage }) {
   const [crop, setCrop] = useState({ aspect: 16 / 9 });
@@ -44,6 +45,8 @@ export default function CropImage({ image, setImage }) {
       "image/jpeg",
       0.95
     );
+
+    setCrop(null);
   };
 
   return (
