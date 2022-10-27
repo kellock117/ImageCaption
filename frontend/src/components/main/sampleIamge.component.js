@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/sampleImg.css"
+import "./css/sampleImg.css";
 
 const sampleImgCont = {
   boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",

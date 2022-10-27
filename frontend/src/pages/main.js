@@ -26,9 +26,14 @@ export default function Captioning() {
 
   // display sample image
   const onClick = event => {
-    fetch(event.target.alt)
-      .then(res => res.blob())
-      .then(file => setImage(file));
+    fetch(`/sampleImage/${event.target.alt}`)
+      .then(response => response.json())
+      .then(result => {
+        {
+          setImage(result);
+          console.log(result);
+        }
+      });
   };
 
   // clear the image and result
@@ -48,7 +53,7 @@ export default function Captioning() {
       <div className="parent">
         <div className="child1">
           {/* retreive the image from the DropZone component */}
-          <DropZone onDrop={onDrop} image={image} />
+          <DropZone onDrop={onDrop} image={image} setImage={setImage} />
 
           {/* give the image file to fetch it to the server */}
 
@@ -58,7 +63,8 @@ export default function Captioning() {
           <SampleImage onClick={onClick} />
         </div>
       </div>
-      <div className="radioBtnBox"
+      <div
+        className="radioBtnBox"
         onChange={event => {
           setFeature(event.target.value);
           setQuestion(null);
@@ -70,12 +76,17 @@ export default function Captioning() {
         <input type="radio" className="btn2" name="feature" value="vqa" />
         <label>Visual Question answering</label>
       </div>
-      <div>   
+      <div>
         <SubmitButton image={image} question={question} onSubmit={onSubmit} />
         <div className="questionTextBoxCont">
           <p className="questionLabel">Question : </p>
-          <input type="text" className = "questionTextBox" id="question" onChange={onChange} 
-              disabled={feature != "vqa" ? true : null}/>
+          <input
+            type="text"
+            className="questionTextBox"
+            id="question"
+            onChange={onChange}
+            disabled={feature !== "vqa" ? true : null}
+          />
         </div>
       </div>
       {/* display the result */}
