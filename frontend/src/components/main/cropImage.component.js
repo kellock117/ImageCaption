@@ -3,7 +3,7 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
 export default function CropImage({ image, setImage }) {
-  const [crop, setCrop] = useState({ aspect: 16 / 9 });
+  const [crop, setCrop] = useState(null);
   const [imgInfo, setImgInfo] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 

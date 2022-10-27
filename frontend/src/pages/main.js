@@ -26,14 +26,11 @@ export default function Captioning() {
 
   // display sample image
   const onClick = event => {
-    fetch(`/sampleImage/${event.target.alt}`)
-      .then(response => response.json())
-      .then(result => {
-        {
-          setImage(result);
-          console.log(result);
-        }
-      });
+    const fileName = `/${event.target.alt}.jpg`;
+
+    fetch(fileName)
+      .then(response => response.blob())
+      .then(blob => setImage(new File([blob], fileName)));
   };
 
   // clear the image and result
@@ -57,7 +54,9 @@ export default function Captioning() {
 
           {/* give the image file to fetch it to the server */}
 
-          <button className="clrBtn" onClick={clear}>Clear</button>
+          <button className="clrBtn" onClick={clear}>
+            Clear
+          </button>
         </div>
         <div className="child2">
           <SampleImage onClick={onClick} />
@@ -71,8 +70,15 @@ export default function Captioning() {
         }}
       >
         <p className="radioText1">Task : </p>
-        <input type="radio" className="btn1" name="feature" value="captioning" defaultChecked />
-        <label>Captioning</label><br/>
+        <input
+          type="radio"
+          className="btn1"
+          name="feature"
+          value="captioning"
+          defaultChecked
+        />
+        <label>Captioning</label>
+        <br />
         <input type="radio" className="btn2" name="feature" value="vqa" />
         <label>Visual Question answering</label>
       </div>
