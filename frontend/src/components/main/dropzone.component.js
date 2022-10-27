@@ -6,12 +6,8 @@ import CropImage from "./cropImage.component";
 
 // css for body
 const bodyStyle = {
-  textAlign: "center",
-  padding: "21px",
   border: "2px black dashed",
-  width: "90%",
-  margin: "auto",
-  minWidth: "300px",
+  height: "220px",
 };
 
 //css for button

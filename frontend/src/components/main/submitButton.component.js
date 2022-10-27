@@ -1,15 +1,16 @@
 import React from "react";
+import "./css/submitButton.css"
 
 const captionStrategy = {
-  border : '1px solid #ccc',
-  backgroundColor: 'white',
-  borderRadius : '10px',
-  margin: "auto",
+  boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
+  background: "white",
+  borderRadius: "10px",
   padding: "10px",
-  width: '350px',
-  height: '80px',
+  width: '290px',
+  height: '100px',
   lineHeight: '15px',
-  marginTop: '-70px',
+  marginLeft: "760px",
+  marginTop: '-100px',
 }
 
 const captionText = {
@@ -18,15 +19,17 @@ const captionText = {
 
 const selectBoxStyle = {
   border: '1px solid #ccc',
-  borderRadius: '8px',
+  borderRadius: "10px", 
   padding: '1px',
   width: '200px',
   textAlign: 'center',
 }
 
 const submitButtonStyle = {
-  position: 'relative',
-  top: '400px',
+  position: "relative",
+  top: "-160px",
+  right: "250px",
+
 }
 
 export default function SubmitButton({ image, question, onSubmit }) {
@@ -77,7 +80,7 @@ export default function SubmitButton({ image, question, onSubmit }) {
         </select>
       </div>
       <div style={submitButtonStyle}>
-        <button disabled={!image} onClick={handleSubmission}>
+        <button disabled={!image} className="subBtn" onClick={handleSubmission}>
           Submit
         </button>
       </div>
