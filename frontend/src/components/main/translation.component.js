@@ -2,13 +2,13 @@ import React from "react";
 
 const translateButton = {
   border: '1px solid #ccc',
-  borderRadius: '8px',
+  borderRadius: '10px',
   marginLeft: '5px',
 }
 
 const selectStyle = {
   border: '1px solid #ccc',
-  borderRadius: '8px',
+  borderRadius: '10px',
   padding: '1px',
   width: '100px',
 }

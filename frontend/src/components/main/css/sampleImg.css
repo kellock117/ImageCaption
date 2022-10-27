@@ -1,5 +1,5 @@
-img {
-    width: 150px;
+.sampleimg1, .sampleimg2 {
+    width: 180px;
     height: auto;
     max-width: 100%;
     max-height: 100%;

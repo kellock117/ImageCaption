@@ -57,7 +57,7 @@ export default function Captioning() {
 
           {/* give the image file to fetch it to the server */}
 
-          <button onClick={clear}>Clear</button>
+          <button className="clrBtn" onClick={clear}>Clear</button>
         </div>
         <div className="child2">
           <SampleImage onClick={onClick} />
@@ -71,16 +71,10 @@ export default function Captioning() {
         }}
       >
         <p className="radioText1">Task : </p>
-        <input
-          type="radio"
-          className="btn1"
-          name="feature"
-          value="captioning"
-          defaultChecked
-        />
-        Captioning
+        <input type="radio" className="btn1" name="feature" value="captioning" defaultChecked />
+        <label>Captioning</label><br/>
         <input type="radio" className="btn2" name="feature" value="vqa" />
-        Visual Question answering
+        <label>Visual Question answering</label>
       </div>
       <div>
         <SubmitButton image={image} question={question} onSubmit={onSubmit} />

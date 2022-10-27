@@ -20,30 +20,25 @@ body, html, .App, #root, .auth-wrapper {
   height: 100%;
 }
 
+label {
+  font-family: inherit;
+  font-weight: normal;
+}
+
 .navbar-light {
   background-color: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
 }
 
-.parent {
-  display: flex;
-}
-
-.child2 {
-  flex: 1;
-}
-
 .radioBtnBox {
-  margin: auto;
-  margin-top: -20px;
-  margin-left: 350px;
+  margin-left: 500px;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  border-radius: 15px; 
+  border-radius: 10px; 
   background: #ffffff;
-  width: 350px;
-  height: 80px;
+  width: 257px;
+  height: 100px;
   padding: 10px;
-  text-align: center;
+  text-align: left;
   line-height: 15px;
 }
 
@@ -53,12 +48,12 @@ body, html, .App, #root, .auth-wrapper {
 }
 
 .btn1 {
-  margin-right: 9px;
+  margin-right: 10px;
 }
 
 .btn2 {
-  margin-left: 20px;
-  margin-right: 8px;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 .questionTextBox {
@@ -66,20 +61,21 @@ body, html, .App, #root, .auth-wrapper {
   background-color: white;
   border-radius: 10px;
   word-wrap: break-word;
-  width: 450px;
+  width: 100%;
   font-family: Sans-serif;
   text-align: center;
   font-size: 25px;
+  height: 35px;
 }
 
 .questionTextBoxCont {
-  border : 1px solid #ccc;
-  background-color: white;
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   border-radius : 10px;
-  margin: auto;
   padding: 10px;
-  width: 500px;
-
+  width: 550px;
+  margin-left: 500px;
+  margin-top: -45px;
 }
 
 .questionLabel {
@@ -91,17 +87,25 @@ body, html, .App, #root, .auth-wrapper {
   flex-direction: column;
   text-align: left;
 }
+.parent {
+  flex:none;
+}
+
+.child2 { 
+  margin-top: -290px;
+  margin-left: 1100px;
+}
 .auth-inner, .child1 {
-  width: 450px;
-  margin: auto;
-  margin-left: 350px;
+  margin-left: 500px ;
+  margin-top: 10px;
+  width: 550px;
+  min-width: 550px;
+  height: 330px;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 55px 45px 55px;
-  border-radius: 15px;
+  border-radius: 10px;
   transition: all .3s;
-  flex: 1;
-  
 }
 .auth-wrapper .form-control:focus {
   border-color: #167bff;
@@ -126,4 +130,50 @@ body, html, .App, #root, .auth-wrapper {
 }
 .forgot-password a {
   color: #167bff;
+}
+.clrBtn {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #d3d3d3;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: absolute;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+  top: 327px;
+  left: 790px;
+  z-index: 1;
+}
+
+.clrBtn:hover {
+  background-color: #d3d3d3;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.clrBtn:hover {
+  transform: translateY(-1px);
+}
+
+.clrBtn:active {
+  background-color: #d3d3d3;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
 }
