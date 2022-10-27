@@ -2,6 +2,7 @@ from controller.captioning_controller import apiCaption
 from controller.history_controller import apiSaveData, apiSaveVQAData, apiViewHistory, apiViewVQAHistory
 from controller.translation_contorller import apiTranslateLang
 from controller.vqa_controller import apiVQA
+from controller.sampleImage_controller import apiSampleImage
 
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
@@ -59,3 +60,8 @@ async def VQAHistory() -> list:
 @app.post("/translate")
 def translate(text: str = Body(), translateTo: str = Body()) -> str:
     return apiTranslateLang(text, translateTo)
+
+
+@app.get("/sampleImage/{fileName}")
+def sampleImage(fileName: str):
+    return apiSampleImage(fileName)

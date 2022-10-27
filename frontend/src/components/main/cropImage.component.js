@@ -57,7 +57,12 @@ export default function CropImage({ image, setImage }) {
         crop={crop}
         onChange={crop => setCrop(crop)}
       />
-      <button onClick={cropImageNow}>Crop</button>
+      <button
+        disabled={crop?.width === 0 && crop.x === 0 && crop.y === 0}
+        onClick={cropImageNow}
+      >
+        Crop
+      </button>
     </>
   );
 }
