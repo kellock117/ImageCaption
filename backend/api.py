@@ -1,5 +1,5 @@
 from controller.captioning_controller import apiCaption
-from controller.history_controller import apiSaveData, apiSaveVQAData, apiViewHistory
+from controller.history_controller import apiSaveData, apiSaveVQAData, apiViewHistory, apiViewVQAHistory
 from controller.translation_contorller import apiTranslateLang
 from controller.vqa_controller import apiVQA
 
@@ -25,21 +25,23 @@ app.add_middleware(
 @app.post("/caption")
 async def caption(image: UploadFile = File(...), strategy: str = Form()) -> str:
     readImage = await image.read()
+
     # produce the caption
     caption = apiCaption(readImage, strategy)
     
     # save the image and caption information
-    status = apiSaveData(image, caption)
-
+    status = apiSaveData(readImage, image.filename, caption)
+    await image.close()
     return caption if status else "Something went wrong"
 
 
 @app.post("/vqa")
 async def vqa(image: UploadFile = File(...), question: str = Form()) -> str:
     readImage = await image.read()
+    
     answer = apiVQA(readImage, question) 
 
-    status = apiSaveVQAData(image, str(question), answer)
+    status = apiSaveVQAData(readImage, image.filename, str(question), answer)
 
     return answer if status else "Something went wrong"
 
@@ -47,6 +49,11 @@ async def vqa(image: UploadFile = File(...), question: str = Form()) -> str:
 @app.get("/history")
 async def history() -> list:
     return await apiViewHistory()
+
+
+@app.get("/vqaHistory")
+async def VQAHistory() -> list:
+    return await apiViewVQAHistory()
 
 
 @app.post("/translate")
