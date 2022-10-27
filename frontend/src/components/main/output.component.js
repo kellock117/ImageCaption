@@ -3,12 +3,12 @@ import Translation from "./translation.component";
 import Audio from "./audio.component";
 
 const outputContainerStyle = {
-  border : '1px solid #ccc',
-  backgroundColor: 'white',
+  background: "white",
+  boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
   borderRadius : '10px',
-  width: '50%',
-  margin: 'auto',
-  marginTop: '10px',
+  width: '550px',
+  marginLeft: '500px',
+  marginTop: '3px',
   padding: '10px',
   textAlign: 'left',
   
@@ -29,12 +29,12 @@ const outputFontStyle = {
 }
 
 const TranslationContainerStyle = {
-  border : '1px solid #ccc',
-  backgroundColor: 'white',
+  background: "white",
+  boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
   borderRadius : '10px',
   width: '300px',
-  margin: 'auto',
-  marginTop: '10px',
+  marginLeft: '610px',
+  marginTop: '3px',
   padding: '10px',
   textAlign: 'center',
 }
