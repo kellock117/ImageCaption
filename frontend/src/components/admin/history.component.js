@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./css/historytable.css"
 
 export default function History() {
   const [history, setHistory] = useState(null);
@@ -27,15 +28,22 @@ export default function History() {
   if (!history) return null;
 
   return (
-    <div>
-      <ul>
+    <table id = "historyTable">
+      <tr>
+        <th colspan="2">Captioning History</th>
+      </tr>
+      <tr>
+        <th>Image</th>
+        <th>Caption</th>
+      </tr>
         {history.map(val => (
-          <li key={val.image}>
-            <img src={val.image} alt="img" height="300" width="300" />{" "}
-            {val.caption}
-          </li>
+          <tr>
+            <td key={val.image}>
+              <img id="histImg" src={val.image} alt="img" height="300" width="300" />
+            </td>
+            <td>{" "} {val.caption}</td>
+          </tr>
         ))}
-      </ul>
-    </div>
+    </table>
   );
 }

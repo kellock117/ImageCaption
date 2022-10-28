@@ -26,10 +26,10 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <h3>Sign In</h3>
+    <div className="auth-inner">
+      <h3 className="signIn">Sign In</h3>
       <div className="mb-3">
-        <label>Email address</label>
+        <label>Email address : </label>
         <input
           type="email"
           className="form-control"
@@ -39,7 +39,7 @@ export default function Login() {
         />
       </div>
       <div className="mb-3">
-        <label>Password</label>
+        <label>Password : </label>
         <input
           type="password"
           className="form-control"

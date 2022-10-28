@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./css/vqatable.css"
 
 export default function History() {
   const [history, setHistory] = useState(null);
@@ -27,16 +28,24 @@ export default function History() {
   if (!history) return null;
 
   return (
-    <div>
-      <ul>
+    <table id="vqaTable">
+      <tr>
+        <th colspan="3">VQA History</th>
+      </tr>
+      <tr>
+        <th>Image</th>
+        <th>Question</th>
+        <th>Answer</th>
+      </tr>
         {history.map(val => (
-          <li key={val.image}>
-            <img src={val.image} alt="img" height="300" width="300" /> Question:{" "}
-            {val.question} <br />
-            Answer: {val.answer}
-          </li>
+            <tr>
+              <td key={val.image}>
+                <img id="srcImg" src={val.image} alt="img" height="300" width="300" />
+              </td>
+              <td>{" "} {val.question}</td>
+              <td>{val.answer}</td>
+            </tr>
         ))}
-      </ul>
-    </div>
+    </table>
   );
 }
