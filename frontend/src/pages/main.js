@@ -26,14 +26,11 @@ export default function Captioning() {
 
   // display sample image
   const onClick = event => {
-    fetch(`/sampleImage/${event.target.alt}`)
-      .then(response => response.json())
-      .then(result => {
-        {
-          setImage(result);
-          console.log(result);
-        }
-      });
+    const fileName = `/${event.target.alt}.jpg`;
+
+    fetch(fileName)
+      .then(response => response.blob())
+      .then(blob => setImage(new File([blob], fileName)));
   };
 
   // clear the image and result
@@ -57,7 +54,9 @@ export default function Captioning() {
 
           {/* give the image file to fetch it to the server */}
 
-          <button className="clrBtn" onClick={clear}>Clear</button>
+          <button className="clrBtn" onClick={clear}>
+            Clear
+          </button>
         </div>
         <div className="child2">
           <SampleImage onClick={onClick} />
