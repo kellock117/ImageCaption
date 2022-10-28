@@ -110,10 +110,17 @@ label.class {
 
 .adminParent {
   display: flex;
+  gap: 100px;
 }
 
-.adminChild {
+.adminChild1 {
   flex: 1;
+  margin-left: 100px;
+}
+
+.adminChild2{
+  flex: 1;
+  margin-right: 100px;
 }
 
 .auth-inner {
