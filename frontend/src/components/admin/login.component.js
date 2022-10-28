@@ -26,7 +26,7 @@ export default function Login() {
   }
 
   return (
-    <div>
+    <div className="auth-inner">
       <h3 className="signIn">Sign In</h3>
       <div className="mb-3">
         <label>Email address : </label>

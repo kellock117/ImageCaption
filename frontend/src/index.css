@@ -108,6 +108,14 @@ label.class {
   transition: all .3s;
 }
 
+.adminParent {
+  display: flex;
+}
+
+.adminChild {
+  flex: 1;
+}
+
 .auth-inner {
   margin: auto;
   margin-top: 200px;
