@@ -18,13 +18,13 @@ const outputTextBoxStyle = {
   height: "35px",
   width: "100%",
   borderRadius: "10px",
-  wordWrap: "break-all",
 };
 
 const outputFontStyle = {
+  padding: '5px',
   fontFamily: "Sans-serif",
   textAlign: "center",
-  fontSize: "25px",
+  fontSize: "1.1rem",
 };
 
 const TranslationContainerStyle = {

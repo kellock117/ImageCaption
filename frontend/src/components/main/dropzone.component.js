@@ -6,7 +6,7 @@ import "./css/dropzone.css";
 // css for body
 const bodyStyle = {
   border: "2px black dashed",
-  height: "300px",
+  height: "280px",
 };
 
 //css for button

@@ -32,6 +32,7 @@ label.task {
 
 .radioBtnBox {
   margin-left: 500px;
+  margin-top: 75px;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   border-radius: 10px; 
   background: #ffffff;
@@ -100,7 +101,7 @@ label.task {
   margin-top: 10px;
   width: 550px;
   min-width: 550px;
-  height: 450px;
+  height: 380px;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 55px 45px 55px;
@@ -191,7 +192,7 @@ label.task {
   touch-action: manipulation;
   vertical-align: baseline;
   width: auto;
-  top: 531px;
+  top: 467px;
   left: 790px;
   z-index: 1;
 }
