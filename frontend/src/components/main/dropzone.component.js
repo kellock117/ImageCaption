@@ -1,13 +1,12 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
-import "./css/dropzone.css";
-
 import CropImage from "./cropImage.component";
+import "./css/dropzone.css";
 
 // css for body
 const bodyStyle = {
   border: "2px black dashed",
-  height: "220px",
+  height: "300px",
 };
 
 //css for button
@@ -40,6 +39,7 @@ export default function DropZone({ onDrop, open, image, setImage }) {
         <input className="input-zone" {...getInputProps()} />
         <div className="text-center">
           <p className="dropzone-content">Drag and drop an image here</p>
+          <p> - OR - </p>
         </div>
         <button type="button" onClick={open} className="btn" style={btnStyle}>
           Click here to select images

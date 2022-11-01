@@ -20,7 +20,7 @@ body, html, .App, #root, .auth-wrapper {
   height: 100%;
 }
 
-label.class {
+label.task {
   font-family: inherit;
   font-weight: normal;
 }
@@ -100,7 +100,7 @@ label.class {
   margin-top: 10px;
   width: 550px;
   min-width: 550px;
-  height: 330px;
+  height: 450px;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 55px 45px 55px;
@@ -191,7 +191,7 @@ label.class {
   touch-action: manipulation;
   vertical-align: baseline;
   width: auto;
-  top: 327px;
+  top: 531px;
   left: 790px;
   z-index: 1;
 }
