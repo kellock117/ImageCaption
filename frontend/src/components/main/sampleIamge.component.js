@@ -22,14 +22,14 @@ export default function SampleImage({ onClick }) {
       <p style={sampleImgText}>Sample Images : </p>
       <img
         className="sampleimg1"
-        alt="apple"
-        src="./apple.jpg"
+        alt="ingredients"
+        src="./ingredients.jpg"
         onClick={onClick}
       />
       <img
         className="sampleimg2"
-        alt="tree"
-        src="./tree.jpg"
+        alt="fruits"
+        src="./fruits.jpg"
         onClick={onClick}
       />
     </div>

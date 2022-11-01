@@ -4,7 +4,6 @@ import "react-image-crop/dist/ReactCrop.css";
 
 export default function CropImage({ image, setImage }) {
   const [crop, setCrop] = useState(null);
-  const [imgInfo, setImgInfo] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
@@ -12,12 +11,14 @@ export default function CropImage({ image, setImage }) {
   }, [image]);
 
   const cropImageNow = () => {
+    let img = document.getElementById("preview");
+    // Dynamically create a canvas element
     const canvas = document.createElement("canvas");
-    const scaleX = imgInfo.naturalWidth / imgInfo.width;
-    const scaleY = imgInfo.naturalHeight / imgInfo.height;
+    const scaleX = img.naturalWidth / img.width;
+    const scaleY = img.naturalHeight / img.height;
     canvas.width = crop.width;
     canvas.height = crop.height;
-    const ctx = canvas.getContext("2d");
+    let ctx = canvas.getContext("2d");
 
     const pixelRatio = window.devicePixelRatio;
     canvas.width = crop.width * pixelRatio;
@@ -25,8 +26,9 @@ export default function CropImage({ image, setImage }) {
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     ctx.imageSmoothingQuality = "high";
 
+    // Actual resizing
     ctx.drawImage(
-      imgInfo,
+      img,
       crop.x * scaleX,
       crop.y * scaleY,
       crop.width * scaleX,
@@ -37,7 +39,6 @@ export default function CropImage({ image, setImage }) {
       crop.height
     );
 
-    // Converting to base64
     canvas.toBlob(
       blob => {
         setImage(new File([blob], image.name));
@@ -51,18 +52,15 @@ export default function CropImage({ image, setImage }) {
 
   return (
     <>
-      <ReactCrop
-        src={imageFile}
-        onImageLoaded={setImgInfo}
-        crop={crop}
-        onChange={crop => setCrop(crop)}
-      />
-      <button
-        disabled={crop?.width === 0 && crop.x === 0 && crop.y === 0}
-        onClick={cropImageNow}
-      >
-        Crop
-      </button>
+      <ReactCrop crop={crop} onChange={crop => setCrop(crop)}>
+        <img
+          id="preview"
+          alt="preview"
+          src={imageFile}
+          style={{ width: "400px", maxHeight: "100%" }}
+        />
+      </ReactCrop>
+      <button onClick={cropImageNow}>Crop</button>
     </>
   );
 }
