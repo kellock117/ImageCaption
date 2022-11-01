@@ -38,7 +38,7 @@ const TranslationContainerStyle = {
   textAlign: "center",
 };
 
-const translate = event => {
+const getDefinition = event => {
   const data = { word: event.target.id };
   fetch("/definition", {
     method: "POST",
@@ -63,7 +63,7 @@ export default function Output({ output, language, onSubmit }) {
             {output &&
               output.split(" ").map(word => {
                 return (
-                  <label id={word} onClick={translate}>
+                  <label id={word} onClick={getDefinition}>
                     {word}&nbsp;
                   </label>
                 );
