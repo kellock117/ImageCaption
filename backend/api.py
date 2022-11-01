@@ -2,7 +2,7 @@ from controller.captioning_controller import apiCaption
 from controller.history_controller import apiSaveData, apiSaveVQAData, apiViewHistory, apiViewVQAHistory
 from controller.translation_contorller import apiTranslateLang
 from controller.vqa_controller import apiVQA
-from controller.sampleImage_controller import apiSampleImage
+from controller.definition_controller import apiGetDefinition
 
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
@@ -43,7 +43,7 @@ async def vqa(image: UploadFile = File(...), question: str = Form()) -> str:
     answer = apiVQA(readImage, question) 
 
     status = apiSaveVQAData(readImage, image.filename, str(question), answer)
-
+    await image.close()
     return answer if status else "Something went wrong"
 
 
@@ -62,6 +62,6 @@ def translate(text: str = Body(), translateTo: str = Body()) -> str:
     return apiTranslateLang(text, translateTo)
 
 
-@app.get("/sampleImage/{fileName}")
-def sampleImage(fileName: str):
-    return apiSampleImage(fileName)
+@app.post("/definition")
+def definition(word: str = Body(embed=True)) -> list:
+    return apiGetDefinition(word)
