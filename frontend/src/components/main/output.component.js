@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Translation from "./translation.component";
 import Audio from "./audio.component";
 
@@ -38,22 +38,23 @@ const TranslationContainerStyle = {
   textAlign: "center",
 };
 
-const getDefinition = event => {
-  const data = { word: event.target.id };
-  fetch("/definition", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then(response => response.json())
-    .then(result => {
-      console.log(result);
-    });
-};
-
 export default function Output({ output, language, onSubmit }) {
+  const [definition, setDefinition] = useState(null);
+  const getDefinition = event => {
+    const data = { word: event.target.id };
+    fetch("/definition", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(result => {
+        setDefinition(result);
+      });
+  };
+
   return (
     <div>
       <div style={outputContainerStyle}>
@@ -70,6 +71,7 @@ export default function Output({ output, language, onSubmit }) {
               })}
           </h1>
         </div>
+        <div>{definition && definition.map(d => <h1>{d}</h1>)}</div>
       </div>
       <div style={TranslationContainerStyle}>
         <Translation text={output} onSubmit={onSubmit} />
