@@ -44,7 +44,7 @@ export default function CropImage({ image, setImage }) {
         setImage(new File([blob], image.name));
       },
       "image/jpeg",
-      0.95
+      1
     );
 
     setCrop(null);
