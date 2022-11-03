@@ -1,6 +1,6 @@
-import React from "react";
 import Translation from "./translation.component";
 import Audio from "./audio.component";
+import React from "react";
 
 const outputContainerStyle = {
   background: "white",
@@ -23,7 +23,7 @@ const outputTextBoxStyle = {
 const outputFontStyle = {
   padding: '5px',
   fontFamily: "Sans-serif",
-  textAlign: "center",
+  textAlign: 'center',
   fontSize: "1.1rem",
 };
 
@@ -63,9 +63,11 @@ export default function Output({ output, language, onSubmit }) {
             {output &&
               output.split(" ").map(word => {
                 return (
-                  <label id={word} onClick={getDefinition}>
-                    {word}&nbsp;
-                  </label>
+                  <>
+                    <label id={word} onClick={getDefinition}>
+                      {word}&nbsp;
+                    </label>
+                  </>
                 );
               })}
           </h1>
