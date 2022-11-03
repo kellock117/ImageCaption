@@ -62,7 +62,7 @@ export default function CropImage({ image, setImage }) {
         setImage(new File([blob], image.name));
       },
       "image/jpeg",
-      0.95
+      1
     );
 
     setCrop(null);
@@ -70,18 +70,15 @@ export default function CropImage({ image, setImage }) {
 
   return (
     <>
-      <div style={cropzone}>
-        <ReactCrop crop={crop} onChange={crop => setCrop(crop)}>
-          <img
-            id="preview"
-            alt="preview"
-            src={imageFile}
-            style={{ width: "100%", height: "auto", 
-            maxWidth: "100%", maxHeight: "300px",}}
-          />
-        </ReactCrop>
-        </div>
-        <button onClick={cropImageNow} style={cropBtn}>Crop</button>
+      <ReactCrop crop={crop} onChange={crop => setCrop(crop)}>
+        <img
+          id="preview"
+          alt="preview"
+          src={imageFile}
+          style={{ width: "400px", maxHeight: "100%" }}
+        />
+      </ReactCrop>
+      <button onClick={cropImageNow}>Crop</button>
     </>
   );
 }

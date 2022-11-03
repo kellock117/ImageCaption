@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Translation from "./translation.component";
 import Audio from "./audio.component";
 import React from "react";
@@ -13,6 +14,13 @@ const outputContainerStyle = {
   textAlign: "left",
 };
 const outputTextBoxStyle = {
+  border: "1px solid #ccc",
+  backgroundColor: "white",
+  height: "35px",
+  width: "100%",
+  borderRadius: "10px",
+  wordWrap: "break-all",
+};
   border: "1px solid #ccc",
   backgroundColor: "white",
   height: "35px",
@@ -38,22 +46,23 @@ const TranslationContainerStyle = {
   textAlign: "center",
 };
 
-const getDefinition = event => {
-  const data = { word: event.target.id };
-  fetch("/definition", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then(response => response.json())
-    .then(result => {
-      console.log(result);
-    });
-};
-
 export default function Output({ output, language, onSubmit }) {
+  const [definition, setDefinition] = useState(null);
+  const getDefinition = event => {
+    const data = { word: event.target.id };
+    fetch("/definition", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(result => {
+        setDefinition(result);
+      });
+  };
+
   return (
     <div>
       <div style={outputContainerStyle}>
@@ -63,15 +72,14 @@ export default function Output({ output, language, onSubmit }) {
             {output &&
               output.split(" ").map(word => {
                 return (
-                  <>
-                    <label id={word} onClick={getDefinition}>
-                      {word}&nbsp;
-                    </label>
-                  </>
+                  <label id={word} onClick={getDefinition}>
+                    {word}&nbsp;
+                  </label>
                 );
               })}
           </h1>
         </div>
+        <div>{definition && definition.map(d => <h1>{d}</h1>)}</div>
       </div>
       <div style={TranslationContainerStyle}>
         <Translation text={output} onSubmit={onSubmit} />
