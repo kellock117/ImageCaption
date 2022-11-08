@@ -126,11 +126,10 @@ def BLIP(url: str, **kwargs):
     assert(len(msg.missing_keys)==0)
 
     return model    
-         
 
 
 def loadCheckPoint(model,url):
-    cachedFile = download_cached_file(url, check_hash=False, progress=True)
+    cachedFile = downloadCachedFile(url, checkHash=False, progress=True)
     checkpoint = torch.load(cachedFile) 
         
     stateDict = checkpoint['model']
@@ -144,33 +143,32 @@ def loadCheckPoint(model,url):
             if stateDict[key].shape!=model.state_dict()[key].shape:
                 del stateDict[key]
     
-    msg = model.load_state_dict(state_dict,strict=False)
-    print('load checkpoint from %s'%url_or_filename)  
+    msg = model.load_state_dict(stateDict,strict=False)
+    print(url, "loaded")  
     return model,msg
 
 _logger = logging.getLogger(__name__)
 
-def get_cache_dir(child_dir=''):
+def downloadCachedFile(url, checkHash, progress):
+    parts = urlparse(url.replace('*', ''))
+    filename = os.path.basename(parts.path)
+    cachedFile = os.path.join(getCacheDir(''), filename)
+    if not os.path.exists(cachedFile):
+        _logger.info('Downloading: "{}" to {}\n'.format(url, cachedFile))
+        hashPrefix = None
+        if checkHash:
+            r = HASH_REGEX.search(filename)  # r is Optional[Match[str]]
+            hashPrefix = r.group(1) if r else None
+        download_url_to_file(url, cachedFile, hashPrefix, progress=progress)
+    return cachedFile
+
+def getCacheDir(childDir):
     # Issue warning to move data if old env is set
     if os.getenv('TORCH_MODEL_ZOO'):
         _logger.warning('TORCH_MODEL_ZOO is deprecated, please use env TORCH_HOME instead')
 
-    hub_dir = get_dir().replace("/", '\\')
-    child_dir = () if not child_dir else (child_dir,)
-    model_dir = os.path.join(hub_dir, 'checkpoints', *child_dir)
-    os.makedirs(model_dir, exist_ok=True)
-    return model_dir
-
-
-def download_cached_file(url, check_hash=True, progress=False):
-    parts = urlparse(url.replace('*', ''))
-    filename = os.path.basename(parts.path)
-    cached_file = os.path.join(get_cache_dir(), filename)
-    if not os.path.exists(cached_file):
-        _logger.info('Downloading: "{}" to {}\n'.format(url, cached_file))
-        hash_prefix = None
-        if check_hash:
-            r = HASH_REGEX.search(filename)  # r is Optional[Match[str]]
-            hash_prefix = r.group(1) if r else None
-        download_url_to_file(url, cached_file, hash_prefix, progress=progress)
-    return cached_file
+    hubDir = get_dir().replace("/", '\\')
+    childDir = () if not childDir else (childDir,)
+    modelDir = os.path.join(hubDir, 'checkpoints', *childDir)
+    os.makedirs(modelDir, exist_ok=True)
+    return modelDir
