@@ -1,5 +1,5 @@
 from models.med import BertConfig, BertModel, BertLMHeadModel
-from models.blip import create_vit, init_tokenizer, load_checkpoint
+from models.blip import createVit, initTokenizer, loadCheckPoint
 
 import torch
 from torch import nn
@@ -8,22 +8,18 @@ import torch.nn.functional as F
 
 class BLIP_VQA(nn.Module):
     def __init__(self,                 
-                 med_config = 'models/configs/medConfig.json',  
-                 image_size = 480,
-                 vit = 'base',
-                 vit_grad_ckpt = False,
-                 vit_ckpt_layer = 0,                   
+                 med_config = 'models/medConfig.json',  
+                 imageSize = 480,
+                 visionWidth = 768,
+                 depth = 12,
+                 numHeads = 12,
+                 dropPathRate = 0
                  ):
-        """
-        Args:
-            med_config (str): path for the mixture of encoder-decoder model's configuration file
-            image_size (int): input image size
-            vit (str): model size of vision transformer
-        """               
+           
         super().__init__()
         
-        self.visual_encoder, vision_width = create_vit(vit, image_size, vit_grad_ckpt, vit_ckpt_layer, drop_path_rate=0.1)
-        self.tokenizer = init_tokenizer()  
+        self.visual_encoder, vision_width = createVit(imageSize, visionWidth, depth, numHeads, dropPathRate)
+        self.tokenizer = initTokenizer()  
         
         encoder_config = BertConfig.from_json_file(med_config)
         encoder_config.encoder_width = vision_width
@@ -42,11 +38,7 @@ class BLIP_VQA(nn.Module):
                                   return_tensors="pt").to(image.device) 
         question.input_ids[:,0] = self.tokenizer.enc_token_id
         
-        if train:               
-            '''
-            n: number of answers for each question
-            weights: weight for each answer
-            '''                     
+        if train:                               
             answer = self.tokenizer(answer, padding='longest', return_tensors="pt").to(image.device) 
             answer.input_ids[:,0] = self.tokenizer.bos_token_id
             answer_targets = answer.input_ids.masked_fill(answer.input_ids == self.tokenizer.pad_token_id, -100)      
@@ -78,8 +70,6 @@ class BLIP_VQA(nn.Module):
             loss = loss.sum()/image.size(0)
 
             return loss
-            
-
         else: 
             question_output = self.text_encoder(question.input_ids, 
                                                 attention_mask = question.attention_mask, 
@@ -117,7 +107,6 @@ class BLIP_VQA(nn.Module):
                 
                 
     def rank_answer(self, question_states, question_atts, answer_ids, answer_atts, k):
-        
         num_ques = question_states.size(0)
         start_ids = answer_ids[0,0].repeat(num_ques,1) # bos token
         
@@ -127,17 +116,14 @@ class BLIP_VQA(nn.Module):
                                          return_dict = True,
                                          reduction = 'none')              
         logits = start_output.logits[:,0,:] # first token's logit
-        
-        # topk_probs: top-k probability 
-        # topk_ids: [num_question, k]        
+           
         answer_first_token = answer_ids[:,1]
         prob_first_token = F.softmax(logits,dim=1).index_select(dim=1, index=answer_first_token) 
-        topk_probs, topk_ids = prob_first_token.topk(k,dim=1) 
-        
-        # answer input: [num_question*k, answer_len]                 
+        _, topk_ids = prob_first_token.topk(k,dim=1) 
+                  
         input_ids = []
         input_atts = []
-        for b, topk_id in enumerate(topk_ids):
+        for _, topk_id in enumerate(topk_ids):
             input_ids.append(answer_ids.index_select(dim=0, index=topk_id))
             input_atts.append(answer_atts.index_select(dim=0, index=topk_id))
         input_ids = torch.cat(input_ids,dim=0)  
@@ -166,12 +152,11 @@ class BLIP_VQA(nn.Module):
         return max_ids
     
     
-def blip_vqa(pretrained='',**kwargs):
+def VQA(url: str, **kwargs):
     model = BLIP_VQA(**kwargs)
 
-    if pretrained:
-        model, msg = load_checkpoint(model,pretrained)
-        assert(len(msg.missing_keys)==0)
+    model, msg = loadCheckPoint(model,url)
+    assert(len(msg.missing_keys)==0)
 
     return model  
 

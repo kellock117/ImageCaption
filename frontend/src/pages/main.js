@@ -33,12 +33,6 @@ export default function Captioning() {
       .then(blob => setImage(new File([blob], fileName)));
   };
 
-  // clear the image and result
-  const clear = () => {
-    setImage(null);
-    setResult(null);
-  };
-
   // detect the change in question for VQA
   const onChange = event => {
     setQuestion(event.target.value);
@@ -51,22 +45,31 @@ export default function Captioning() {
         <div className="child1">
           {/* retreive the image from the DropZone component */}
           <DropZone onDrop={onDrop} image={image} setImage={setImage} />
-
-          {/* give the image file to fetch it to the server */}
-
-          <button className="clrBtn" onClick={clear}>
+          {/* clear the image and result */}
+          <button
+            className="clrBtn"
+            onClick={() => {
+              setImage(null);
+              setResult(null);
+              setQuestion(null);
+              document.getElementById("question").value = "";
+            }}
+          >
             Clear
           </button>
         </div>
         <div className="child2">
+          {/* display sample image, when the user click it then image will be uploaded */}
           <SampleImage onClick={onClick} />
         </div>
       </div>
+      {/* radio buttons which let the user can choose between image caption and visual question answering */}
       <div
         className="radioBtnBox"
         onChange={event => {
           setFeature(event.target.value);
           setQuestion(null);
+          document.getElementById("question").value = "";
         }}
       >
         <p className="radioText1">Task : </p>
@@ -76,7 +79,9 @@ export default function Captioning() {
         <label className="task">Visual Question answering</label>
       </div>
       <div>
+        {/* give the image file to fetch it to the server */}
         <SubmitButton image={image} question={question} onSubmit={onSubmit} />
+        {/* place where the user write the question down */}
         <div className="questionTextBoxCont">
           <p className="questionLabel">Question : </p>
           <input
