@@ -9,9 +9,9 @@ export default function History() {
     const fetchHistory = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:8000/history").then(
-          res => res.json()
-        );
+        const response = await fetch(
+          "http://localhost:8000/captionHistory"
+        ).then(res => res.json());
         setHistory(response);
       } catch (e) {
         setError(e);

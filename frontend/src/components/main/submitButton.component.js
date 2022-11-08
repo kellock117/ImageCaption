@@ -1,36 +1,35 @@
 import React from "react";
-import "./css/submitButton.css"
+import "./css/submitButton.css";
 
 const captionStrategy = {
   boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
   background: "white",
   borderRadius: "10px",
   padding: "10px",
-  width: '290px',
-  height: '100px',
-  lineHeight: '15px',
+  width: "290px",
+  height: "100px",
+  lineHeight: "15px",
   marginLeft: "760px",
-  marginTop: '-100px',
-}
+  marginTop: "-100px",
+};
 
 const captionText = {
-  textAlign: 'left',
-}
+  textAlign: "left",
+};
 
 const selectBoxStyle = {
-  border: '1px solid #ccc',
-  borderRadius: "10px", 
-  padding: '1px',
-  width: '200px',
-  textAlign: 'center',
-}
+  border: "1px solid #ccc",
+  borderRadius: "10px",
+  padding: "1px",
+  width: "200px",
+  textAlign: "center",
+};
 
 const submitButtonStyle = {
   position: "relative",
   top: "-160px",
   right: "250px",
-
-}
+};
 
 export default function SubmitButton({ image, question, onSubmit }) {
   const handleSubmission = async () => {
@@ -73,10 +72,10 @@ export default function SubmitButton({ image, question, onSubmit }) {
       <div style={captionStrategy}>
         <p style={captionText}>Decoding Strategy : </p>
         <select id="strategy" style={selectBoxStyle}>
-          <option value="BeamSearch" defaultValue>
+          <option value="Beam Search" defaultValue>
             Beam Search
           </option>
-          <option value="NucleusSampling">Nucleus Sampling</option>
+          <option value="Nucleus Sampling">Nucleus Sampling</option>
         </select>
       </div>
       <div style={submitButtonStyle}>

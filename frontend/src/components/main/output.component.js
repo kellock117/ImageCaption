@@ -64,14 +64,20 @@ export default function Output({ output, language, onSubmit }) {
             {output &&
               output.split(" ").map(word => {
                 return (
-                  <label id={word} onClick={getDefinition}>
+                  <label key={word} onClick={getDefinition}>
                     {word}&nbsp;
                   </label>
                 );
               })}
           </h1>
         </div>
-        <div>{definition && definition.map(d => <h1>{d}</h1>)}</div>
+        <div>
+          {definition?.length === 0 ? (
+            <label>No Result Found</label>
+          ) : (
+            definition?.map(d => <h1>{d}</h1>)
+          )}
+        </div>
       </div>
       <div style={TranslationContainerStyle}>
         <Translation text={output} onSubmit={onSubmit} />

@@ -1,5 +1,5 @@
 from controller.captioning_controller import apiCaption
-from controller.history_controller import apiSaveData, apiSaveVQAData, apiViewHistory, apiViewVQAHistory
+from controller.history_controller import apiSaveCaptionData, apiSaveVQAData, apiViewCaptionHistory, apiViewVQAHistory
 from controller.translation_contorller import apiTranslateLang
 from controller.vqa_controller import apiVQA
 from controller.definition_controller import apiGetDefinition
@@ -31,7 +31,7 @@ async def caption(image: UploadFile = File(...), strategy: str = Form()) -> str:
     caption = apiCaption(readImage, strategy)
     
     # save the image and caption information
-    status = apiSaveData(readImage, image.filename, caption)
+    status = apiSaveCaptionData(readImage, image.filename, caption)
     await image.close()
     return caption if status else "Something went wrong"
 
@@ -47,9 +47,9 @@ async def vqa(image: UploadFile = File(...), question: str = Form()) -> str:
     return answer if status else "Something went wrong"
 
 
-@app.get("/history")
+@app.get("/captionHistory")
 async def history() -> list:
-    return await apiViewHistory()
+    return await apiViewCaptionHistory()
 
 
 @app.get("/vqaHistory")
