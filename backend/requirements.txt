@@ -1,0 +1,14 @@
+uvicorn 
+fastapi 
+python-dotenv 
+translators 
+torch 
+torchvision 
+requests 
+pillow 
+transformers==4.15.0 
+timm 
+fairscale 
+python-multipart 
+pyrebase4
+Py-Definition

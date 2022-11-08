@@ -73,17 +73,10 @@ export default function Captioning() {
         }}
       >
         <p className="radioText1">Task : </p>
-        <input
-          type="radio"
-          className="btn1"
-          name="feature"
-          value="captioning"
-          defaultChecked
-        />
-        <label>Captioning</label>
-        <br />
+        <input type="radio" className="btn1" name="feature" value="captioning" defaultChecked />
+        <label className="task">Captioning</label><br/>
         <input type="radio" className="btn2" name="feature" value="vqa" />
-        <label>Visual Question answering</label>
+        <label className="task">Visual Question answering</label>
       </div>
       <div>
         {/* give the image file to fetch it to the server */}
