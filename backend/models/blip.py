@@ -3,8 +3,8 @@ warnings.filterwarnings("ignore")
 import logging
 import os
 
-from models.vit import VisionTransformer, interpolate_pos_embed
-from models.med import BertConfig, BertModel, BertLMHeadModel
+from models.vit import VisionTransformer, interpolatePosEmbed
+from models.med import BertConfig, BertLMHeadModel
 from transformers import BertTokenizer
 
 import torch
@@ -104,10 +104,8 @@ class BLIP_Decoder(nn.Module):
     
 
 def createVit(imageSize, visionWidth, depth, numHeads, dropPathRate):
-    visualEncoder = VisionTransformer(img_size = imageSize, patch_size=16, embed_dim=visionWidth, depth=depth, 
-                                      num_heads=numHeads, use_grad_checkpointing=False, ckpt_layer=0,
-                                      drop_path_rate = dropPathRate
-                                      )   
+    visualEncoder = VisionTransformer(img_size = imageSize, embed_dim=visionWidth, depth=depth, 
+                                      num_heads=numHeads, drop_path_rate = dropPathRate)   
 
     return visualEncoder, visionWidth
 
@@ -134,9 +132,9 @@ def loadCheckPoint(model,url):
         
     stateDict = checkpoint['model']
     
-    stateDict['visual_encoder.pos_embed'] = interpolate_pos_embed(stateDict['visual_encoder.pos_embed'],model.visual_encoder) 
+    stateDict['visual_encoder.pos_embed'] = interpolatePosEmbed(stateDict['visual_encoder.pos_embed'],model.visual_encoder) 
     if 'visual_encoder_m.pos_embed' in model.state_dict().keys():
-        stateDict['visual_encoder_m.pos_embed'] = interpolate_pos_embed(stateDict['visual_encoder_m.pos_embed'],
+        stateDict['visual_encoder_m.pos_embed'] = interpolatePosEmbed(stateDict['visual_encoder_m.pos_embed'],
                                                                          model.visual_encoder_m)    
     for key in model.state_dict().keys():
         if key in stateDict.keys():
@@ -157,13 +155,12 @@ def downloadCachedFile(url, checkHash, progress):
         _logger.info('Downloading: "{}" to {}\n'.format(url, cachedFile))
         hashPrefix = None
         if checkHash:
-            r = HASH_REGEX.search(filename)  # r is Optional[Match[str]]
+            r = HASH_REGEX.search(filename) 
             hashPrefix = r.group(1) if r else None
         download_url_to_file(url, cachedFile, hashPrefix, progress=progress)
     return cachedFile
 
 def getCacheDir(childDir):
-    # Issue warning to move data if old env is set
     if os.getenv('TORCH_MODEL_ZOO'):
         _logger.warning('TORCH_MODEL_ZOO is deprecated, please use env TORCH_HOME instead')
 
