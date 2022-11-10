@@ -31,12 +31,12 @@ const submitButtonStyle = {
   right: "250px",
 };
 
-export default function SubmitButton({ image, question, onSubmit }) {
+export default function SubmitButton({ image, feature, question, onSubmit }) {
   const handleSubmission = async () => {
     let formData = new FormData();
     formData.append("image", image);
 
-    if (question) {
+    if (feature === "vqa") {
       formData.append("question", question);
       await fetch("/vqa", {
         method: "POST",
@@ -67,11 +67,16 @@ export default function SubmitButton({ image, question, onSubmit }) {
         });
     }
   };
+
   return (
     <div>
       <div style={captionStrategy}>
         <p style={captionText}>Decoding Strategy : </p>
-        <select id="strategy" style={selectBoxStyle}>
+        <select
+          id="strategy"
+          style={selectBoxStyle}
+          disabled={feature === "vqa"}
+        >
           <option value="Beam Search" defaultValue>
             Beam Search
           </option>
