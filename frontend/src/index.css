@@ -192,8 +192,8 @@ label.task {
   touch-action: manipulation;
   vertical-align: baseline;
   width: auto;
+  left: 800px;
   top: 467px;
-  left: 790px;
   z-index: 1;
 }
 

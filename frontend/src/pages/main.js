@@ -37,6 +37,7 @@ export default function Captioning() {
   const clear = () => {
     setImage(null);
     setResult(null);
+    setQuestion(null);
   };
 
   // detect the change in question for VQA

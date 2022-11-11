@@ -5,17 +5,18 @@ import "react-image-crop/dist/ReactCrop.css";
 const cropBtn = {
   border: '1px solid #ccc',
   borderRadius: '10px',
-  position: "absolute",
-  top: '474px',
-  left: "930px",
-  zIndex: "1",
+  position: 'absolute',
+  top: "471px",
+  left: "920px",
+  right: "920px",
+  zIndex: '1',
 };
 
 const cropzone = {
   display: 'flex',
   justifyContent: 'center',
   margin: 'auto',
-  height: "300px",
+  height: "280px",
   width: "440px",
   maxHeight: '280px',
 };
@@ -75,10 +76,10 @@ export default function CropImage({ image, setImage }) {
           id="preview"
           alt="preview"
           src={imageFile}
-          style={{ width: "400px", maxHeight: "100%" }}
+          style={{ width: "100%", height: "auto", maxWidth: "100%", maxHeight: "280px" }}
         />
       </ReactCrop>
-      <button onClick={cropImageNow}>Crop</button>
+      <button style={cropBtn} onClick={cropImageNow}>Crop</button>
     </>
   );
 }
