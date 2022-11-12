@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import Translation from "./translation.component";
 import Audio from "./audio.component";
 import "./css/output.css";
 
 export default function Output({ output, language, onSubmit }) {
   const [definition, setDefinition] = useState(null);
-  const [modalIsOpen, setIsOpen] = useState(null);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
   const getDefinition = event => {
     const data = { word: event.target.id };
     fetch("/definition", {
@@ -19,8 +20,8 @@ export default function Output({ output, language, onSubmit }) {
       .then(response => response.json())
       .then(result => {
         setDefinition(result);
+        openModal();
       });
-    openModal();
   };
 
   function openModal() {
@@ -38,9 +39,9 @@ export default function Output({ output, language, onSubmit }) {
         <div className="outputTextBoxStyle">
           <h1 className="outputFontStyle">
             {output &&
-              output.split(" ").map(word => {
+              output.split(" ").map((word, index) => {
                 return (
-                  <label key={word} onClick={getDefinition}>
+                  <label id={word} key={word + index} onClick={getDefinition}>
                     {word}&nbsp;
                   </label>
                 );
@@ -48,10 +49,26 @@ export default function Output({ output, language, onSubmit }) {
           </h1>
         </div>
 
-        <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="Modal" overlayClassName="Overlay">
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          className="Modal"
+          overlayClassName="Overlay"
+          ariaHideApp={false}
+        >
           <h3>Definition</h3>
-          {definition?.length === 0 ? <label>No Result Found</label> : definition.map(d => <ul><li>{d}</li></ul>)}
-          <button id="modalCloseBtn" onClick={closeModal}>Close</button>
+          {definition?.length === 0 ? (
+            <label>No Result Found</label>
+          ) : (
+            definition?.map((d, index) => (
+              <ul key={index}>
+                <li>{d}</li>
+              </ul>
+            ))
+          )}
+          <button id="modalCloseBtn" onClick={closeModal}>
+            Close
+          </button>
         </Modal>
       </div>
       <div className="TranslationContainerStyle">
