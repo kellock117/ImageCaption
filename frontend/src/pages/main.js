@@ -41,6 +41,8 @@ export default function Captioning() {
   return (
     <div className="App">
       <Navbar />
+      <h1>Show And Tell</h1>
+      <h4>Drag and drop an image or use an example provided below for captioning</h4>
       <div className="parent">
         <div className="child1">
           {/* retreive the image from the DropZone component */}

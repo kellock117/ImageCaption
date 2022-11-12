@@ -2,6 +2,25 @@ import React, { useState, useEffect } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
+const cropBtn = {
+  border: '1px solid #ccc',
+  borderRadius: '10px',
+  position: 'absolute',
+  top: "471px",
+  left: "920px",
+  right: "920px",
+  zIndex: '1',
+};
+
+const cropzone = {
+  display: 'flex',
+  justifyContent: 'center',
+  margin: 'auto',
+  height: "280px",
+  width: "440px",
+  maxHeight: '280px',
+};
+
 export default function CropImage({ image, setImage }) {
   const [crop, setCrop] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -57,10 +76,10 @@ export default function CropImage({ image, setImage }) {
           id="preview"
           alt="preview"
           src={imageFile}
-          style={{ width: "400px", maxHeight: "100%" }}
+          style={{ width: "100%", height: "auto", maxWidth: "100%", maxHeight: "280px" }}
         />
       </ReactCrop>
-      <button onClick={cropImageNow}>Crop</button>
+      <button style={cropBtn} onClick={cropImageNow}>Crop</button>
     </>
   );
 }

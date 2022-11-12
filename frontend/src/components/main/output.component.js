@@ -1,45 +1,12 @@
 import React, { useState } from "react";
+import Modal from 'react-modal';
 import Translation from "./translation.component";
 import Audio from "./audio.component";
-
-const outputContainerStyle = {
-  background: "white",
-  boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
-  borderRadius: "10px",
-  width: "550px",
-  marginLeft: "500px",
-  marginTop: "3px",
-  padding: "10px",
-  textAlign: "left",
-};
-const outputTextBoxStyle = {
-  border: "1px solid #ccc",
-  backgroundColor: "white",
-  height: "35px",
-  width: "100%",
-  borderRadius: "10px",
-  wordWrap: "break-all",
-};
-
-const outputFontStyle = {
-  fontFamily: "Sans-serif",
-  textAlign: "center",
-  fontSize: "25px",
-};
-
-const TranslationContainerStyle = {
-  background: "white",
-  boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
-  borderRadius: "10px",
-  width: "300px",
-  marginLeft: "610px",
-  marginTop: "3px",
-  padding: "10px",
-  textAlign: "center",
-};
+import "./css/output.css";
 
 export default function Output({ output, language, onSubmit }) {
   const [definition, setDefinition] = useState(null);
+  const [modalIsOpen, setIsOpen] = useState(null);
   const getDefinition = event => {
     const data = { word: event.target.id };
     fetch("/definition", {
@@ -53,14 +20,23 @@ export default function Output({ output, language, onSubmit }) {
       .then(result => {
         setDefinition(result);
       });
+    openModal();
   };
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   return (
     <div>
-      <div style={outputContainerStyle}>
+      <div className="outputContainerStyle">
         <p>Description / Answer :</p>
-        <div style={outputTextBoxStyle}>
-          <h1 style={outputFontStyle}>
+        <div className="outputTextBoxStyle">
+          <h1 className="outputFontStyle">
             {output &&
               output.split(" ").map(word => {
                 return (
@@ -71,15 +47,14 @@ export default function Output({ output, language, onSubmit }) {
               })}
           </h1>
         </div>
-        <div>
-          {definition?.length === 0 ? (
-            <label>No Result Found</label>
-          ) : (
-            definition?.map(d => <h1>{d}</h1>)
-          )}
-        </div>
+
+        <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="Modal" overlayClassName="Overlay">
+          <h3>Definition</h3>
+          {definition?.length === 0 ? <label>No Result Found</label> : definition.map(d => <ul><li>{d}</li></ul>)}
+          <button id="modalCloseBtn" onClick={closeModal}>Close</button>
+        </Modal>
       </div>
-      <div style={TranslationContainerStyle}>
+      <div className="TranslationContainerStyle">
         <Translation text={output} onSubmit={onSubmit} />
         <Audio text={output} language={language} />
       </div>

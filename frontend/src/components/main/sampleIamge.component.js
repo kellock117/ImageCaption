@@ -8,7 +8,7 @@ const sampleImgCont = {
   width: "480px",
   padding: "10px",
   position: "relative",
-  top: "-40px",
+  top: "-90px",
 };
 
 const sampleImgText = {
