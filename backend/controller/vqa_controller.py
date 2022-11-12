@@ -1,4 +1,4 @@
-from models.blip_vqa import blip_vqa
+from models.blip_vqa import VQA
 from PIL import Image
 from io import BytesIO
 
@@ -8,16 +8,15 @@ from torchvision.transforms.functional import InterpolationMode
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-image_size_vq = 480
 transform_vq = transforms.Compose([
-    transforms.Resize((image_size_vq,image_size_vq),interpolation=InterpolationMode.BICUBIC),
+    transforms.Resize((480, 480),interpolation=InterpolationMode.BICUBIC),
     transforms.ToTensor(),
     transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
     ]) 
 
-model_url_vq = 'https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model*_vqa.pth'
+pretrainedModel = 'https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model*_vqa.pth'
     
-model_vq = blip_vqa(pretrained=model_url_vq, image_size=480, vit='base')
+model_vq = VQA(pretrainedModel)
 model_vq.eval()
 model_vq = model_vq.to(device)
 

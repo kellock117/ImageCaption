@@ -40,16 +40,17 @@ export default function Output({ output, language, onSubmit }) {
             {output &&
               output.split(" ").map(word => {
                 return (
-                  <label id={word} onClick={getDefinition}>
+                  <label key={word} onClick={getDefinition}>
                     {word}&nbsp;
                   </label>
                 );
               })}
           </h1>
         </div>
+
         <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="Modal" overlayClassName="Overlay">
           <h3>Definition</h3>
-          {definition && definition.map(d => <ul><li>{d}</li></ul>)}
+          {definition?.length === 0 ? <label>No Result Found</label> : definition.map(d => <ul><li>{d}</li></ul>)}
           <button id="modalCloseBtn" onClick={closeModal}>Close</button>
         </Modal>
       </div>

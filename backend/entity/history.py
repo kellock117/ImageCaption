@@ -21,7 +21,7 @@ firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
 database = firebase.database()
 
-def saveHistory(readImage, fileName: str, text: str) -> bool:
+def saveCaptionHistory(readImage, fileName: str, text: str) -> bool:
     # to avoid duplicated filename, concatenate timestamp after the file name
     fileNameWithTimestamp = str(time.time()).split('.')[0] + fileName
     # save the history information which contains file name and caption
@@ -42,7 +42,7 @@ def saveVQAHistory(readImage, fileName: str, question: str, answer: str) -> bool
     return True
 
 
-def viewHistory() -> list:
+def viewCaptionHistory() -> list:
     data = []
 
     # scrap all of the history information from the database
