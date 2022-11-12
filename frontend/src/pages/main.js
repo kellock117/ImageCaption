@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DropZone from "../components/main/dropzone.component";
 import SubmitButton from "../components/main/submitButton.component";
 import Output from "../components/main/output.component";
-import SampleImage from "../components/main/sampleIamge.component";
+import SampleImage from "../components/main/sampleImage.component";
 import Navbar from "../components/main/mainnavbar.component";
 
 export default function Captioning() {
@@ -42,7 +42,9 @@ export default function Captioning() {
     <div className="App">
       <Navbar />
       <h1>Show And Tell</h1>
-      <h4>Drag and drop an image or use an example provided below for captioning</h4>
+      <h4>
+        Drag and drop an image or use an example provided below for captioning
+      </h4>
       <div className="parent">
         <div className="child1">
           {/* retreive the image from the DropZone component */}
@@ -85,7 +87,7 @@ export default function Captioning() {
         <label className="task">Captioning</label>
         <br />
         <input type="radio" className="btn2" name="feature" value="vqa" />
-        <label className="task">Visual Question answering</label>
+        <label className="task">Visual Question Answering</label>
       </div>
       <div>
         {/* give the image file to fetch it to the server */}
