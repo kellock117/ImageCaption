@@ -2,11 +2,11 @@
 
 ## Functions
 
-Image Captioning <br />
+# Image Captioning <br />
 
 ![alt text](https://drive.google.com/u/0/uc?id=1lYSxaPSg23z0a2Tml8SYCS1t2B3xG4Pr&export=download)
 
-Visual Question Answering <br />
+# Visual Question Answering <br />
 ![alt text](https://drive.google.com/u/0/uc?id=1q4J1jUXgv2KGqGHIOFBryGgp2IxDFJsi&export=download)
 
 ## dependencies
@@ -24,7 +24,7 @@ git clone/pull -b [branch-name] --single-branch https://gitlab.com/uowfyp/show-a
 
 ## Reference
 
-https://huggingface.co/spaces/Salesforce/BLIP (model)
+https://huggingface.co/spaces/Salesforce/BLIP (model) <br />
 https://github.com/WebDevSimplified/React-Firebase-Auth (Authentication) <br/>
 https://blog.openreplay.com/create-a-drag-and-drop-zone-in-react-with-react-dropzone (drag and drop)<br/>
 https://zih0.tistory.com/42 (crop)
