@@ -4,7 +4,7 @@
 
 Image Captioning <br />
 
-![alt text](https://drive.google.com/file/d/1lYSxaPSg23z0a2Tml8SYCS1t2B3xG4Pr/view?usp=share_link)
+![alt text](https://drive.google.com/file/d/1lYSxaPSg23z0a2Tml8SYCS1t2B3xG4Pr/view)
 
 Visual Question Answering <br />
 
