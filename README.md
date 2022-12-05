@@ -1,28 +1,28 @@
 # show and tell with a Computer
 
-## Functions
+# Functions
 
-# Image Captioning <br />
+## Image Captioning <br />
 
 ![alt text](https://drive.google.com/u/0/uc?id=1lYSxaPSg23z0a2Tml8SYCS1t2B3xG4Pr&export=download)
 
-# Visual Question Answering <br />
+## Visual Question Answering <br />
 ![alt text](https://drive.google.com/u/0/uc?id=1q4J1jUXgv2KGqGHIOFBryGgp2IxDFJsi&export=download)
 
-## dependencies
+# dependencies
 
 python version: 3.8.13
 frontend / npm install <br />
 backend / pip install uvicorn fastapi python-dotenv translators torch torchvision requests pillow transformers(4.15.0) timm fairscale python-multipart pyrebase4
 
-## Clone or pull the code
+# Clone or pull the code
 
 ```
 git clone/pull https://gitlab.com/uowfyp/show-and-tell-with-a-computer.git (for clone the main branch)
 git clone/pull -b [branch-name] --single-branch https://gitlab.com/uowfyp/show-and-tell-with-a-computer.git (for clone the specific branch)
 ```
 
-## Reference
+# Reference
 
 https://huggingface.co/spaces/Salesforce/BLIP (model) <br />
 https://github.com/WebDevSimplified/React-Firebase-Auth (Authentication) <br/>
